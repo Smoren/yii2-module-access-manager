@@ -1,7 +1,7 @@
 {
   "name": "smoren/yii2-module-access-manager",
   "description": "Access manager and control module for Yii2",
-  "type": "yii2-extension",
+  "type": "package",
   "keywords": ["yii2", "extension", "module", "access", "access manager", "access control"],
   "license": "MIT",
   "authors": [
