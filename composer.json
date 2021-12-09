@@ -30,12 +30,12 @@
     }
   },
   "scripts": {
-    "post-package-install": [
+    "post-package-update": [
       "echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
       "mkdir -p modules",
       "cp -R vendor/smoren/yii2-module-access-manager/resources/access modules/"
     ],
-    "post-install-cmd": [
+    "post-update-cmd": [
       "echo ?????????????????????????????",
       "mkdir -p modules",
       "cp -R vendor/smoren/yii2-module-access-manager/resources/access modules/"
