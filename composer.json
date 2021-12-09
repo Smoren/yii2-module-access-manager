@@ -41,7 +41,7 @@
     }
   ],
   "scripts": {
-    "post-install-cmd": [
+    "post-package-install": [
       "mkdir -p modules",
       "cp -R vendor/smoren/yii2-module-access-manager/resources/access modules/"
     ]
