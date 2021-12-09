@@ -41,7 +41,7 @@
     }
   ],
   "scripts": {
-    "post-package-install": [
+    "post-install-cmd": [
       "Smoren\\Yii2\\AccessManager\\composer\\ComposerScripts::postPackageInstall"
     ]
   }
