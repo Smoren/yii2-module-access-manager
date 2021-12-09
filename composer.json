@@ -1,7 +1,7 @@
 {
   "name": "smoren/yii2-module-access-manager",
   "description": "Access manager and control module for Yii2",
-  "type": "package",
+  "type": "yii2-extension",
   "keywords": ["yii2", "extension", "module", "access", "access manager", "access control"],
   "license": "MIT",
   "authors": [
@@ -29,17 +29,6 @@
       "Smoren\\Yii2\\AccessManager\\": "src"
     }
   },
-  "config": {
-    "fxp-asset": {
-      "enabled": false
-    }
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
-    }
-  ],
   "scripts": {
     "post-package-install": [
       "echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
@@ -51,5 +40,16 @@
       "mkdir -p modules",
       "cp -R vendor/smoren/yii2-module-access-manager/resources/access modules/"
     ]
-  }
+  },
+  "config": {
+    "fxp-asset": {
+      "enabled": false
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
 }
