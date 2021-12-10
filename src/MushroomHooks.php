@@ -38,12 +38,12 @@ class MushroomHooks
             $fullFilePath = "{$moduleDir}/{$filePath}";
             if(is_dir($fullFilePath)) {
                 $extraFiles = BaseFileHelper::findFiles($fullFilePath, [
-                    'filter' => function($fileName) {
-                        return preg_match('/\.php$/', $fileName);
+                    'filter' => function($extraFilePath) {
+                        return preg_match('/\.php$/', $extraFilePath);
                     }
                 ]);
-                foreach($extraFiles as $extraFileName) {
-                    $filesToUpdate[] = "{$fullFilePath}/{$extraFileName}";
+                foreach($extraFiles as $extraFilePath) {
+                    $filesToUpdate[] = $extraFilePath;
                 }
             } else {
                 file_put_contents(
