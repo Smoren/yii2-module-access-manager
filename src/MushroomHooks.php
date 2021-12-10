@@ -19,7 +19,7 @@ class MushroomHooks
             return;
         }
 
-        BaseFileHelper::copyDirectory(__DIR__.'/../resources/module', $modulesDir);
+        BaseFileHelper::copyDirectory(__DIR__.'/../resources/module', "{$modulesDir}/{$moduleName}");
 
         echo "\e[32m[OK]\e[39m Module '{$moduleName}' added to your project. See '/modules/{$moduleName}/Module.php'.\n";
     }
