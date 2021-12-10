@@ -14,7 +14,7 @@ class MushroomHooks
     public static function afterInstall($params)
     {
         $moduleName = $params['module-name'] ?? 'access';
-        $validationRegexp = '/^[a-z_]+{3,}$/';
+        $validationRegexp = '/^[a-z_]{3,}$/';
 
         if(!preg_match($validationRegexp, $moduleName)) {
             echo "\e[33m[WARNING]\e[39m Module name validation failed"
