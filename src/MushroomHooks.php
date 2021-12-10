@@ -34,8 +34,11 @@ class MushroomHooks
 
         $filesToUpdate = ['Module.php', 'tests/unit/AccessTest.php', 'migrations'];
         for($i=0; $i<count($filesToUpdate); ++$i) {
-            $filePath = $filesToUpdate[$i];
-            $fullFilePath = "{$moduleDir}/{$filePath}";
+            $filesToUpdate[$i] = "{$moduleDir}/{$filesToUpdate[$i]}";
+        }
+
+        for($i=0; $i<count($filesToUpdate); ++$i) {
+            $fullFilePath = $filesToUpdate[$i];
             if(is_dir($fullFilePath)) {
                 $extraFiles = BaseFileHelper::findFiles($fullFilePath, [
                     'filter' => function($extraFilePath) {
