@@ -31,6 +31,7 @@
     }
   },
   "extra": {
+    "mushroom-use-hooks": true,
     "mushroom-hooks": {
       "after-install": [
         "Smoren\\Yii2\\AccessManager\\MushroomHooks::afterInstall"
