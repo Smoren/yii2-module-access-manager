@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\__MODULE_NAME__;
+namespace app\modules\access;
 
 use Yii;
 use yii\base\Application;

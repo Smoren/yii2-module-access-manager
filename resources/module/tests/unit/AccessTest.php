@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\__MODULE_NAME__\tests\unit;
+namespace app\modules\access\tests\unit;
 
 
 use Smoren\Yii2\AccessManager\components\ApiAccessChecker;
