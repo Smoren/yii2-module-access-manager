@@ -15,12 +15,12 @@ class MushroomHooks
         $modulesDir = HookManager::PATH_PROJECT.'/modules';
 
         if(is_dir("{$modulesDir}/{$moduleName}")) {
-            echo "\e[33m[WARNING] Module '{$moduleName}' already exist in project, skipping hook.\e[39m\n";
+            echo "\e[33m[WARNING]\e[39m Module '{$moduleName}' already exist in project, skipping hook.\n";
             return;
         }
 
         BaseFileHelper::copyDirectory(__DIR__.'/../resources/module', $modulesDir);
 
-        echo "\e[32m[WARNING] Module '{$moduleName}' added to your project. See '/modules/{$moduleName}/Module.php'.\e[39m\n";
+        echo "\e[32m[OK]\e[39m Module '{$moduleName}' added to your project. See '/modules/{$moduleName}/Module.php'.\n";
     }
 }
