@@ -59,5 +59,13 @@ class MushroomHooks
         }
 
         echo "\e[32m[OK]\e[39m Module '{$moduleName}' added to your project. See '/modules/{$moduleName}/Module.php'.\n";
+
+        $configHelp = str_replace(
+            self::MODULE_NAME_MASK,
+            $moduleName,
+            file_get_contents(__DIR__.'/../resources/tpl/config.tpl')
+        );
+
+        echo "Please update your config:\n\n{$configHelp}\n\n";
     }
 }
