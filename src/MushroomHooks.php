@@ -44,13 +44,14 @@ class MushroomHooks
                 foreach($extraFiles as $extraFileName) {
                     $filesToUpdate[] = "{$fullFilePath}/{$extraFileName}";
                 }
+            } else {
+                file_put_contents(
+                    $fullFilePath,
+                    str_replace(
+                        self::MODULE_NAME_MASK, $moduleName, file_get_contents($fullFilePath)
+                    )
+                );
             }
-            file_put_contents(
-                $fullFilePath,
-                str_replace(
-                    self::MODULE_NAME_MASK, $moduleName, file_get_contents($fullFilePath)
-                )
-            );
         }
 
         echo "\e[32m[OK]\e[39m Module '{$moduleName}' added to your project. See '/modules/{$moduleName}/Module.php'.\n";
