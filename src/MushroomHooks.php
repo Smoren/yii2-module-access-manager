@@ -58,7 +58,7 @@ class MushroomHooks
             }
         }
 
-        echo "\e[32m[OK]\e[39m Module '{$moduleName}' added to your project. See '/modules/{$moduleName}/Module.php'.\n";
+        echo "\e[32m[OK]\e[39m Module '{$moduleName}' added to your project.\n";
 
         $configHelp = str_replace(
             self::MODULE_NAME_MASK,
@@ -66,6 +66,6 @@ class MushroomHooks
             file_get_contents(__DIR__.'/../resources/tpl/config.tpl')
         );
 
-        echo "Please update your config:\n\n{$configHelp}\n\n";
+        echo "\nPlease update your yii2 configs and run migrations:\n\n\e[36m{$configHelp}\e[39m\n\n";
     }
 }
