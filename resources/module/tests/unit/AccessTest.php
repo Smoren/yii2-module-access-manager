@@ -1,6 +1,6 @@
 <?php
 
-namespace Smoren\Yii2\AccessManager\tests\unit;
+namespace app\modules\__MODULE_NAME__\tests\unit;
 
 
 use Smoren\Yii2\AccessManager\components\ApiAccessChecker;
@@ -9,7 +9,6 @@ use Smoren\Yii2\AccessManager\components\RuleAccessChecker;
 use Smoren\Yii2\AccessManager\models\Api;
 use Smoren\Yii2\AccessManager\models\Rule;
 use Codeception\Test\Unit;
-use Smoren\ExtendedExceptions\BadDataException;
 use Smoren\Yii2\ActiveRecordExplicit\exceptions\DbException;
 use Smoren\Yii2\Auth\exceptions\ApiException;
 use Smoren\Yii2\Auth\structs\StatusCode;
