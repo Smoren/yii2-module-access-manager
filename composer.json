@@ -30,10 +30,12 @@
       "Smoren\\Yii2\\AccessManager\\": "src"
     }
   },
-  "mushroom-hooks": {
-    "after-install": [
-      "Smoren\\Yii2\\AccessManager\\MushroomHooks::afterInstall"
-    ]
+  "extra": {
+    "mushroom-hooks": {
+      "after-install": [
+        "Smoren\\Yii2\\AccessManager\\MushroomHooks::afterInstall"
+      ]
+    }
   },
   "config": {
     "fxp-asset": {
