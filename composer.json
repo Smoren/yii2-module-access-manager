@@ -14,6 +14,7 @@
     "php": ">=7.2.0",
     "ext-json": "*",
     "yiisoft/yii2": "~2.0.0",
+    "smoren/mushroom-hook-manager": "1.0.0",
     "smoren/extended-exceptions": "1.0.0",
     "smoren/yii2-helpers": "dev-master",
     "smoren/yii2-active-record-explicit": "dev-master",
@@ -29,16 +30,9 @@
       "Smoren\\Yii2\\AccessManager\\": "src"
     }
   },
-  "scripts": {
-    "post-package-update": [
-      "echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-      "mkdir -p modules",
-      "cp -R vendor/smoren/yii2-module-access-manager/resources/access modules/"
-    ],
-    "post-update-cmd": [
-      "echo ?????????????????????????????",
-      "mkdir -p modules",
-      "cp -R vendor/smoren/yii2-module-access-manager/resources/access modules/"
+  "mushroom-hooks": {
+    "after-install": [
+      "Smoren\\Yii2\\AccessManager\\MushroomHooks::afterInstall"
     ]
   },
   "config": {
