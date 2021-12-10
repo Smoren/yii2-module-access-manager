@@ -33,7 +33,8 @@ class MushroomHooks
         BaseFileHelper::copyDirectory(__DIR__.'/migrations', "{$moduleDir}/migrations");
 
         $filesToUpdate = ['Module.php', 'tests/unit/AccessTest.php', 'migrations'];
-        foreach($filesToUpdate as $filePath) {
+        for($i=0; $i<count($filesToUpdate); ++$i) {
+            $filePath = $filesToUpdate[$i];
             $fullFilePath = "{$moduleDir}/{$filePath}";
             if(is_dir($fullFilePath)) {
                 $extraFiles = BaseFileHelper::findFiles($fullFilePath, [
