@@ -5,8 +5,10 @@ namespace Smoren\Yii2\AccessManager\models;
 use Smoren\Yii2\AccessManager\models\query\RuleQuery;
 use Smoren\Yii2\AccessManager\models\query\UserGroupQuery;
 use Smoren\Yii2\AccessManager\models\query\UserGroupRuleQuery;
+use Smoren\Yii2\AccessManager\structs\Constants;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveRecord;
 use thamtech\uuid\validators\UuidValidator;
+use Yii;
 use yii\db\ActiveQuery;
 
 /**
@@ -27,7 +29,7 @@ class UserGroupRule extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'access_user_group_rule';
+        return Yii::getAlias(Constants::TABLE_PREFIX_ALIAS).'_user_group_rule';
     }
 
     /**

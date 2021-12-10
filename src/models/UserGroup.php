@@ -6,8 +6,10 @@ use Smoren\Yii2\AccessManager\models\query\ApiGroupQuery;
 use Smoren\Yii2\AccessManager\models\query\PermissionQuery;
 use Smoren\Yii2\AccessManager\models\query\UserGroupQuery;
 use Smoren\Yii2\AccessManager\models\query\UserUserGroupQuery;
+use Smoren\Yii2\AccessManager\structs\Constants;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveRecord;
 use thamtech\uuid\validators\UuidValidator;
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
 
@@ -32,7 +34,7 @@ class UserGroup extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'access_user_group';
+        return Yii::getAlias(Constants::TABLE_PREFIX_ALIAS).'_user_group';
     }
 
     /**

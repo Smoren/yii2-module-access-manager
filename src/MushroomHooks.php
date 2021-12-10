@@ -5,6 +5,7 @@ namespace Smoren\Yii2\AccessManager;
 
 
 use Smoren\Composer\Mushroom\HookManager;
+use Smoren\Yii2\AccessManager\structs\Constants;
 use yii\helpers\BaseFileHelper;
 
 class MushroomHooks

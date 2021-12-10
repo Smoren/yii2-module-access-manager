@@ -2,6 +2,7 @@
 
 namespace app\modules\access;
 
+use Smoren\Yii2\AccessManager\structs\Constants;
 use Yii;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
@@ -22,7 +23,8 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        Yii::setAlias('@module___MODULE_NAME__', '@app/modules/__MODULE_NAME__');
+        Yii::setAlias('@module_access', '@app/modules/access');
+        Yii::setAlias(Constants::TABLE_PREFIX_ALIAS, 'access');
 
         if($app instanceof \yii\console\Application) {
             $this->controllerNamespace = 'Smoren\Yii2\AccessManager\controllers';
