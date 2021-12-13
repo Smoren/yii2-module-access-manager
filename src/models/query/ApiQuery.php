@@ -14,7 +14,7 @@ class ApiQuery extends ActiveQuery
     /**
      * @param $title
      * @param bool $filter
-     * @return ActiveQuery
+     * @return ActiveQuery|ApiQuery
      */
     public function byTitle($title, bool $filter = false)
     {
@@ -22,9 +22,19 @@ class ApiQuery extends ActiveQuery
     }
 
     /**
+     * @param $apiGroupId
+     * @param bool $filter
+     * @return ActiveQuery|ApiQuery
+     */
+    public function byApiGroup($apiGroupId, bool $filter = false)
+    {
+        return $this->andWhereExtended([$this->aliasColumn('api_group_id') => $apiGroupId], $filter);
+    }
+
+    /**
      * @param $method
      * @param bool $filter
-     * @return ActiveQuery
+     * @return ActiveQuery|ApiQuery
      */
     public function byMethod($method, bool $filter = false)
     {
@@ -34,7 +44,7 @@ class ApiQuery extends ActiveQuery
     /**
      * @param $path
      * @param bool $filter
-     * @return ActiveQuery
+     * @return ActiveQuery|ApiQuery
      */
     public function byPath($path, bool $filter = false)
     {
