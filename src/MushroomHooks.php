@@ -30,6 +30,7 @@ class MushroomHooks
             return;
         }
 
+        BaseFileHelper::createDirectory(HookManager::PATH_PROJECT.'/modules/', null, true);
         BaseFileHelper::copyDirectory(__DIR__.'/../resources/module', $moduleDir);
         BaseFileHelper::copyDirectory(__DIR__.'/migrations', "{$moduleDir}/migrations");
 
