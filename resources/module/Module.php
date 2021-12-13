@@ -36,10 +36,10 @@ class Module extends \yii\base\Module implements BootstrapInterface
              * @see IndexController::actionTest()
              *
              * @OA\PathItem(
-             *   path="/__MODULE_NAME__/test/{id}",
+             *   path="/access/test/{id}",
              *   @OA\Get(
-             *     summary="__MODULE_NAME__ test",
-             *     tags={"__MODULE_NAME__"},
+             *     summary="access test",
+             *     tags={"access"},
              *     security={{"apiKey": {}}},
              *     @OA\Parameter(
              *         name="id",
@@ -58,7 +58,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
              *   )
              * )
              */
-            'GET /__MODULE_NAME__/test/<id:\d+>' => '__MODULE_NAME__/index/test',
+            'GET /access/test/<id:\d+>' => 'access/index/test',
         ], false);
     }
 }
