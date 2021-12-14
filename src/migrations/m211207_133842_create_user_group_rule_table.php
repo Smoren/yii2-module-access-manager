@@ -13,7 +13,6 @@ class m211207_133842_create_user_group_rule_table extends Migration
     /**
      * {@inheritdoc}
      * @throws NotSupportedException
-     * @throws \Smoren\ExtendedExceptions\LogicException
      */
     public function safeUp()
     {
@@ -34,7 +33,6 @@ class m211207_133842_create_user_group_rule_table extends Migration
 
     /**
      * {@inheritdoc}
-     * @throws \Smoren\ExtendedExceptions\LogicException
      */
     public function safeDown()
     {

@@ -2,7 +2,6 @@
 
 namespace Smoren\Yii2\AccessManager\models;
 
-use Smoren\ExtendedExceptions\LogicException;
 use Smoren\Yii2\AccessManager\models\query\UserGroupQuery;
 use Smoren\Yii2\AccessManager\models\query\UserUserGroupQuery;
 use Smoren\Yii2\AccessManager\Module;
@@ -23,7 +22,6 @@ class UserUserGroup extends ActiveRecord
 {
     /**
      * {@inheritdoc}
-     * @throws LogicException
      */
     public static function tableName()
     {

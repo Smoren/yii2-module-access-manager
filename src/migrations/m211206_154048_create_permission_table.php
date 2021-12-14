@@ -13,7 +13,6 @@ class m211206_154048_create_permission_table extends Migration
     /**
      * {@inheritdoc}
      * @throws NotSupportedException
-     * @throws \Smoren\ExtendedExceptions\LogicException
      */
     public function safeUp()
     {
@@ -34,7 +33,6 @@ class m211206_154048_create_permission_table extends Migration
 
     /**
      * {@inheritdoc}
-     * @throws \Smoren\ExtendedExceptions\LogicException
      */
     public function safeDown()
     {

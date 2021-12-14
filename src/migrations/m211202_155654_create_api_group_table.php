@@ -13,7 +13,6 @@ class m211202_155654_create_api_group_table extends Migration
     /**
      * {@inheritdoc}
      * @throws NotSupportedException
-     * @throws \Smoren\ExtendedExceptions\LogicException
      * @throws \yii\base\Exception
      */
     public function safeUp()
@@ -37,7 +36,6 @@ class m211202_155654_create_api_group_table extends Migration
 
     /**
      * {@inheritdoc}
-     * @throws \Smoren\ExtendedExceptions\LogicException
      */
     public function safeDown()
     {

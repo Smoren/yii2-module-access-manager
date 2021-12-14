@@ -13,7 +13,6 @@ class m211206_150647_create_user_group_table extends Migration
     /**
      * {@inheritdoc}
      * @throws NotSupportedException|\yii\base\Exception
-     * @throws \Smoren\ExtendedExceptions\LogicException
      */
     public function safeUp()
     {
@@ -33,7 +32,6 @@ class m211206_150647_create_user_group_table extends Migration
 
     /**
      * {@inheritdoc}
-     * @throws \Smoren\ExtendedExceptions\LogicException
      */
     public function safeDown()
     {

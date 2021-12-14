@@ -15,23 +15,14 @@ class Module extends \yii\base\Module implements BootstrapInterface
      * {@inheritdoc}
      */
     public $controllerNamespace = 'Smoren\Yii2\AccessManager\controllers';
-    /**
-     * @var string prefix for DB tables of module
-     */
-    protected static $dbTablePrefix;
 
     /**
      * Returns DB table prefix
      * @return string
-     * @throws LogicException
      */
     public static function getDbTablePrefix(): string
     {
-        if(static::$dbTablePrefix === null) {
-            throw new LogicException('module does not included to bootstrap config section', 1);
-        }
-
-        return static::$dbTablePrefix;
+        return static::getInstance()->id;
     }
 
     /**

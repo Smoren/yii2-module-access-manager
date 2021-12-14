@@ -2,7 +2,6 @@
 
 namespace Smoren\Yii2\AccessManager\models;
 
-use Smoren\ExtendedExceptions\LogicException;
 use Smoren\Yii2\AccessManager\models\query\ApiGroupQuery;
 use Smoren\Yii2\AccessManager\models\query\PermissionQuery;
 use Smoren\Yii2\AccessManager\models\query\UserGroupQuery;
@@ -25,7 +24,6 @@ class Permission extends ActiveRecord
 {
     /**
      * {@inheritdoc}
-     * @throws LogicException
      */
     public static function tableName()
     {
