@@ -2,8 +2,7 @@
 
 namespace Smoren\Yii2\AccessManager;
 
-use Smoren\Yii2\AccessManager\structs\Constants;
-use Yii;
+use Smoren\ExtendedExceptions\LogicException;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
 
@@ -16,6 +15,24 @@ class Module extends \yii\base\Module implements BootstrapInterface
      * {@inheritdoc}
      */
     public $controllerNamespace = 'Smoren\Yii2\AccessManager\controllers';
+    /**
+     * @var string prefix for DB tables of module
+     */
+    protected static $dbTablePrefix;
+
+    /**
+     * Returns DB table prefix
+     * @return string
+     * @throws LogicException
+     */
+    public static function getDbTablePrefix(): string
+    {
+        if(static::$dbTablePrefix === null) {
+            throw new LogicException('module does not included to bootstrap config section', 1);
+        }
+
+        return static::$dbTablePrefix;
+    }
 
     /**
      * Bootstrap method to be called during application bootstrap stage.
@@ -23,8 +40,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        Yii::setAlias('@module_access', '@app/modules/access');
-        Yii::setAlias(Constants::TABLE_PREFIX_ALIAS, 'access');
+        static::$dbTablePrefix = $this->id;
 
         if($app instanceof \yii\console\Application) {
             $this->controllerNamespace = 'Smoren\Yii2\AccessManager\commands';

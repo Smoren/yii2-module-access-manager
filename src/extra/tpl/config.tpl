@@ -5,7 +5,7 @@
 ...
 'modules' => [
     ...
-    'access' => ['class' => 'app\modules\access\Module'],
+    'access' => ['class' => 'Smoren\Yii2\AccessManager\Module'],
 ],
 ...
 'controllerMap' => [
@@ -13,7 +13,7 @@
         ...
         'migrationPath' => [
             ...
-            '@app/modules/access/migrations',
+            '@app/vendor/smoren/yii2-module-access-manager/src/migrations',
         ],
     ],
 ],

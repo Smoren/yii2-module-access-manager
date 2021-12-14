@@ -2,13 +2,13 @@
 
 namespace Smoren\Yii2\AccessManager\models;
 
+use Smoren\ExtendedExceptions\LogicException;
 use Smoren\Yii2\AccessManager\models\query\RuleQuery;
 use Smoren\Yii2\AccessManager\models\query\UserGroupQuery;
 use Smoren\Yii2\AccessManager\models\query\UserGroupRuleQuery;
-use Smoren\Yii2\AccessManager\structs\Constants;
+use Smoren\Yii2\AccessManager\Module;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveRecord;
 use thamtech\uuid\validators\UuidValidator;
-use Yii;
 use yii\db\ActiveQuery;
 
 /**
@@ -26,10 +26,11 @@ class UserGroupRule extends ActiveRecord
 {
     /**
      * {@inheritdoc}
+     * @throws LogicException
      */
     public static function tableName()
     {
-        return Yii::getAlias(Constants::TABLE_PREFIX_ALIAS).'_user_group_rule';
+        return Module::getDbTablePrefix().'_user_group_rule';
     }
 
     /**

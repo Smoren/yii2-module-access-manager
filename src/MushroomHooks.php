@@ -4,70 +4,21 @@
 namespace Smoren\Yii2\AccessManager;
 
 
-use Smoren\Composer\Mushroom\HookManager;
-use Smoren\Yii2\AccessManager\structs\Constants;
-use yii\helpers\BaseFileHelper;
-
+/**
+ * Class MushroomHooks
+ * @package Smoren\Yii2\AccessManager
+ */
 class MushroomHooks
 {
-    const MODULE_NAME_MASK = 'access';
-
+    /**
+     * @param $params
+     */
     public static function afterInstall($params)
     {
-        $moduleName = $params['module-name'] ?? 'access';
-        $validationRegexp = '/^[a-z_]{3,}$/';
+        echo "\e[32m[OK]\e[39m Module 'access' added to your project.\n";
 
-        if(!preg_match($validationRegexp, $moduleName)) {
-            echo "\e[33m[WARNING]\e[39m Module name validation failed"
-                . " (given: '{$moduleName}', regexp: {$validationRegexp}), skipping hook.\n";
-            return;
-        }
+        $configHelp = file_get_contents(__DIR__.'/extra/tpl/config.tpl');
 
-        $moduleDir = HookManager::PATH_PROJECT.'/modules/'.$moduleName;
-
-        if(is_dir($moduleDir)) {
-            echo "\e[33m[WARNING]\e[39m Module '{$moduleName}' already exist in project, skipping hook.\n";
-            return;
-        }
-
-        BaseFileHelper::createDirectory(HookManager::PATH_PROJECT.'/modules/', null, true);
-        BaseFileHelper::copyDirectory(__DIR__.'/../resources/module', $moduleDir);
-        BaseFileHelper::copyDirectory(__DIR__.'/migrations', "{$moduleDir}/migrations");
-
-        $filesToUpdate = ['Module.php', 'tests/unit/AccessTest.php', 'migrations'];
-        for($i=0; $i<count($filesToUpdate); ++$i) {
-            $filesToUpdate[$i] = "{$moduleDir}/{$filesToUpdate[$i]}";
-        }
-
-        for($i=0; $i<count($filesToUpdate); ++$i) {
-            $fullFilePath = $filesToUpdate[$i];
-            if(is_dir($fullFilePath)) {
-                $extraFiles = BaseFileHelper::findFiles($fullFilePath, [
-                    'filter' => function($extraFilePath) {
-                        return preg_match('/\.php$/', $extraFilePath);
-                    }
-                ]);
-                foreach($extraFiles as $extraFilePath) {
-                    $filesToUpdate[] = $extraFilePath;
-                }
-            } else {
-                file_put_contents(
-                    $fullFilePath,
-                    str_replace(
-                        self::MODULE_NAME_MASK, $moduleName, file_get_contents($fullFilePath)
-                    )
-                );
-            }
-        }
-
-        echo "\e[32m[OK]\e[39m Module '{$moduleName}' added to your project.\n";
-
-        $configHelp = str_replace(
-            self::MODULE_NAME_MASK,
-            $moduleName,
-            file_get_contents(__DIR__.'/../resources/tpl/config.tpl')
-        );
-
-        echo "\nPlease update your yii2 configs and run migrations:\n\n\e[36m{$configHelp}\e[39m\n\n";
+        echo "\nPlease update your yii2 configs and then run migrations:\n\n\e[36m{$configHelp}\e[39m\n\n";
     }
 }

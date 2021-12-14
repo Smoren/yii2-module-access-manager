@@ -2,13 +2,12 @@
 
 namespace Smoren\Yii2\AccessManager\models;
 
+use Smoren\ExtendedExceptions\LogicException;
 use Smoren\Yii2\AccessManager\models\query\UserGroupQuery;
 use Smoren\Yii2\AccessManager\models\query\UserUserGroupQuery;
-use Smoren\Yii2\AccessManager\structs\Constants;
+use Smoren\Yii2\AccessManager\Module;
 use Smoren\Yii2\AccessManager\validators\PolytypicIdValidator;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveRecord;
-use thamtech\uuid\validators\UuidValidator;
-use Yii;
 use yii\db\ActiveQuery;
 
 /**
@@ -24,10 +23,11 @@ class UserUserGroup extends ActiveRecord
 {
     /**
      * {@inheritdoc}
+     * @throws LogicException
      */
     public static function tableName()
     {
-        return Yii::getAlias(Constants::TABLE_PREFIX_ALIAS).'_user_user_group';
+        return Module::getDbTablePrefix().'_user_user_group';
     }
 
     /**
