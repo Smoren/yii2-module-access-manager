@@ -31,8 +31,6 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        static::$dbTablePrefix = $this->id;
-
         if($app instanceof \yii\console\Application) {
             $this->controllerNamespace = 'Smoren\Yii2\AccessManager\commands';
         }
