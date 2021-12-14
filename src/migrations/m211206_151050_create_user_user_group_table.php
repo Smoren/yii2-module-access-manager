@@ -28,7 +28,7 @@ class m211206_151050_create_user_user_group_table extends Migration
         $this->createIndex("idx-{$tablePrefix}_user_user_group-user_group_id", "{$tablePrefix}_user_user_group", 'user_group_id');
         $this->createIndex("idx-{$tablePrefix}_user_user_group-user_id-user_group_id", "{$tablePrefix}_user_user_group", ['user_id', 'user_group_id'], true);
         $this->addPrimaryKey("pk-{$tablePrefix}_user_user_group", "{$tablePrefix}_user_user_group", ['user_id', 'user_group_id']);
-        $this->addForeignKey("fk-{$tablePrefix}_user_user_group-user_group_id-{$tablePrefix}_user_group-id", "{$tablePrefix}_user_user_group", 'user_group_id', '{$tablePrefix}_user_group', 'id', 'CASCADE');
+        $this->addForeignKey("fk-{$tablePrefix}_user_user_group-user_group_id-{$tablePrefix}_user_group-id", "{$tablePrefix}_user_user_group", 'user_group_id', "{$tablePrefix}_user_group", 'id', 'CASCADE');
     }
 
     /**

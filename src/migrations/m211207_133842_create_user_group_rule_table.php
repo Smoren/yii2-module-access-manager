@@ -28,8 +28,8 @@ class m211207_133842_create_user_group_rule_table extends Migration
         $this->createIndex("idx-{$tablePrefix}_user_group_rule-rule_id", "{$tablePrefix}_user_group_rule", 'rule_id');
         $this->createIndex("idx-{$tablePrefix}_user_group_rule-user_group_id-rule_id", "{$tablePrefix}_user_group_rule", ['user_group_id', 'rule_id'], true);
         $this->addPrimaryKey("pk-{$tablePrefix}_user_group_rule", "{$tablePrefix}_user_group_rule", ['user_group_id', 'rule_id']);
-        $this->addForeignKey("fk-{$tablePrefix}_user_group_rule-user_group_id-{$tablePrefix}_user_group-id", "{$tablePrefix}_user_group_rule", 'user_group_id', '{$tablePrefix}_user_group', 'id', 'CASCADE');
-        $this->addForeignKey("fk-{$tablePrefix}_user_group_rule-rule_id-{$tablePrefix}_rule-id", "{$tablePrefix}_user_group_rule", 'rule_id', '{$tablePrefix}_rule', 'id', 'CASCADE');
+        $this->addForeignKey("fk-{$tablePrefix}_user_group_rule-user_group_id-{$tablePrefix}_user_group-id", "{$tablePrefix}_user_group_rule", 'user_group_id', "{$tablePrefix}_user_group", 'id', 'CASCADE');
+        $this->addForeignKey("fk-{$tablePrefix}_user_group_rule-rule_id-{$tablePrefix}_rule-id", "{$tablePrefix}_user_group_rule", 'rule_id', "{$tablePrefix}_rule", 'id', 'CASCADE');
     }
 
     /**

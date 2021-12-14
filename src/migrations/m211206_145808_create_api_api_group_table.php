@@ -28,8 +28,8 @@ class m211206_145808_create_api_api_group_table extends Migration
         $this->createIndex("idx-{$tablePrefix}_api_api_group-api_group_id", "{$tablePrefix}_api_api_group", 'api_group_id');
         $this->createIndex("idx-{$tablePrefix}_api_api_group-api_id-api_group_id", "{$tablePrefix}_api_api_group", ['api_id', 'api_group_id'], true);
         $this->addPrimaryKey("pk-{$tablePrefix}_api_api_group", "{$tablePrefix}_api_api_group", ['api_id', 'api_group_id']);
-        $this->addForeignKey("fk-{$tablePrefix}_api_api_group-api_id-{$tablePrefix}_api-id", "{$tablePrefix}_api_api_group", 'api_id', '{$tablePrefix}_api', 'id', 'CASCADE');
-        $this->addForeignKey("fk-{$tablePrefix}_api_api_group-api_group_id-{$tablePrefix}_api_group-id", "{$tablePrefix}_api_api_group", 'api_group_id', '{$tablePrefix}_api_group', 'id', 'CASCADE');
+        $this->addForeignKey("fk-{$tablePrefix}_api_api_group-api_id-{$tablePrefix}_api-id", "{$tablePrefix}_api_api_group", 'api_id', "{$tablePrefix}_api", 'id', 'CASCADE');
+        $this->addForeignKey("fk-{$tablePrefix}_api_api_group-api_group_id-{$tablePrefix}_api_group-id", "{$tablePrefix}_api_api_group", 'api_group_id', "{$tablePrefix}_api_group", 'id', 'CASCADE');
     }
 
     /**
