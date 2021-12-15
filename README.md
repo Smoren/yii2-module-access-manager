@@ -6,8 +6,8 @@ Access manager and control module for Yii2
 composer require smoren/yii2-module-access-manager
 ```
 
-### Path 1
-Simply include in your config:
+### After install
+Include into Yii2 config:
 ```
 ...
 'modules' => [
@@ -36,3 +36,5 @@ Then run migrations:
 ```
 php yii migrate
 ```
+
+Also you can choose another module id if you already have your own module named "access".
