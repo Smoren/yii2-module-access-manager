@@ -16,9 +16,9 @@
     "yiisoft/yii2": "~2.0.0",
     "smoren/mushroom-hook-manager": "1.0.0",
     "smoren/extended-exceptions": "1.0.0",
-    "smoren/yii2-helpers": "dev-master",
-    "smoren/yii2-active-record-explicit": "dev-master",
-    "smoren/yii2-auth-components": "dev-master",
+    "smoren/yii2-helpers": "^0.1.0",
+    "smoren/yii2-active-record-explicit": "^1.0.4",
+    "smoren/yii2-auth-components": "^0.1.0",
     "thamtech/yii2-uuid": "^1.2"
   },
   "require-dev": {
