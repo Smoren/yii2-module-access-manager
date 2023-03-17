@@ -17,7 +17,7 @@
     "smoren/mushroom-hook-manager": "^1.0.0",
     "smoren/extended-exceptions": "^1.0.0",
     "smoren/yii2-helpers": "^0.1.0",
-    "smoren/yii2-active-record-explicit": "^1.0.4",
+    "smoren/yii2-active-record-explicit": "^1.0.4|^2.0.0",
     "smoren/yii2-auth-components": "^0.1.0",
     "thamtech/yii2-uuid": "^1.2"
   },
