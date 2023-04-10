@@ -6,9 +6,13 @@ namespace Smoren\Yii2\AccessManager\tests\unit;
 use Smoren\Yii2\AccessManager\components\ApiAccessChecker;
 use Smoren\Yii2\AccessManager\components\AccessManager;
 use Smoren\Yii2\AccessManager\components\RuleAccessChecker;
+use Smoren\Yii2\AccessManager\interfaces\WorkerInterface;
+use Smoren\Yii2\AccessManager\interfaces\WorkerRepositoryInterface;
 use Smoren\Yii2\AccessManager\models\Api;
 use Smoren\Yii2\AccessManager\models\Rule;
 use Codeception\Test\Unit;
+use Smoren\Yii2\AccessManager\models\Worker;
+use Smoren\Yii2\AccessManager\repository\WorkerRepository;
 use Smoren\Yii2\ActiveRecordExplicit\exceptions\DbException;
 use Smoren\Yii2\Auth\exceptions\ApiException;
 use Smoren\Yii2\Auth\structs\StatusCode;
@@ -16,6 +20,13 @@ use Yii;
 
 class AccessTest extends Unit
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Yii::$container->set(WorkerRepositoryInterface::class, WorkerRepository::class);
+        Yii::$container->set(WorkerInterface::class, Worker::class);
+    }
+
     public function testApiAccess()
     {
         $api1 = AccessManager::createApi('get', '/api1', 'test');

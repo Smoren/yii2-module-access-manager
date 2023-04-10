@@ -5,6 +5,7 @@ namespace Smoren\Yii2\AccessManager\components;
 
 
 use Smoren\Yii2\AccessManager\helpers\UrlManagerHelper;
+use Smoren\Yii2\AccessManager\interfaces\WorkerRepositoryInterface;
 use Smoren\Yii2\AccessManager\models\Api;
 use Smoren\Yii2\AccessManager\models\ApiApiGroup;
 use Smoren\Yii2\AccessManager\models\ApiGroup;
@@ -28,7 +29,10 @@ class RuleAccessChecker
 
     public static function createFromRequestContext(?Connection $dbConn = null): self
     {
-        return new static(Yii::$app->worker->identity->id, $dbConn);
+        return new static(
+            Yii::createObject(WorkerRepositoryInterface::class)->getWorkerFromRequestContext(),
+            $dbConn
+        );
     }
 
     public function __construct(string $workerId, ?Connection $dbConn = null)

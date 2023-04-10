@@ -3,8 +3,8 @@
 
 namespace Smoren\Yii2\AccessManager\components;
 
-
 use Smoren\Yii2\AccessManager\helpers\UrlManagerHelper;
+use Smoren\Yii2\AccessManager\interfaces\WorkerRepositoryInterface;
 use Smoren\Yii2\AccessManager\models\Api;
 use Smoren\Yii2\AccessManager\models\ApiApiGroup;
 use Smoren\Yii2\AccessManager\models\ApiGroup;
@@ -28,7 +28,12 @@ class ApiAccessChecker
     public static function createFromRequestContext(?Connection $dbConn = null): self
     {
         [$method, $path] = UrlManagerHelper::getSummary();
-        return new static($method, $path, Yii::$app->worker->identity->id, $dbConn);
+        return new static(
+            $method,
+            $path,
+            Yii::createObject(WorkerRepositoryInterface::class)->getWorkerFromRequestContext(),
+            $dbConn
+        );
     }
 
     public function __construct(string $method, string $path, string $workerId, ?Connection $dbConn = null)
