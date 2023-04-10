@@ -1,22 +1,22 @@
 <?php
 
-namespace Smoren\Yii2\AccessManager\forms\user_group;
+namespace Smoren\Yii2\AccessManager\forms\worker_group;
 
 /**
- * Model for updating user_group
+ * Model for updating worker_group
  *
- * @OA\Schema(schema="AccessManager\UserGroupUpdateForm", type="object")
+ * @OA\Schema(schema="AccessManager\WorkerGroupUpdateForm", type="object")
  * @OA\Property(
  *     property="alias",
  *     type="string",
- *     example="user_group_alias",
- *     description="User group alias"
+ *     example="worker_group_alias",
+ *     description="Worker group alias"
  * )
  * @OA\Property(
  *     property="title",
  *     type="string",
- *     example="My user group name",
- *     description="User group name"
+ *     example="My worker group name",
+ *     description="Worker group name"
  * )
  * @OA\Property(
  *     property="extra",
@@ -25,7 +25,7 @@ namespace Smoren\Yii2\AccessManager\forms\user_group;
  *     description="Extra data"
  * )
  */
-class UserGroupUpdateForm extends UserGroupCreateForm
+class WorkerGroupUpdateForm extends WorkerGroupCreateForm
 {
     /**
      * @inheritdoc

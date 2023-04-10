@@ -5,9 +5,9 @@ namespace Smoren\Yii2\AccessManager\controllers;
 
 
 use Smoren\Yii2\AccessManager\traits\AccessControlTrait;
-use Smoren\Yii2\Auth\controllers\UserTokenController;
+use Smoren\Yii2\Auth\controllers\WorkerTokenController;
 
-class IndexController extends UserTokenController
+class IndexController extends WorkerTokenController
 {
     use AccessControlTrait;
 

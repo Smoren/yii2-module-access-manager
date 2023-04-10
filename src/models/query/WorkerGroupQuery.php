@@ -5,16 +5,16 @@ namespace Smoren\Yii2\AccessManager\models\query;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[\Smoren\Yii2\AccessManager\models\UserGroup]].
+ * This is the ActiveQuery class for [[\Smoren\Yii2\AccessManager\models\WorkerGroup]].
  *
- * @see \Smoren\Yii2\AccessManager\models\UserGroup
+ * @see \Smoren\Yii2\AccessManager\models\WorkerGroup
  */
-class UserGroupQuery extends \Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery
+class WorkerGroupQuery extends \Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery
 {
     /**
      * @param $alias
      * @param bool $filter
-     * @return ActiveQuery|UserGroupQuery
+     * @return ActiveQuery|WorkerGroupQuery
      */
     public function byAlias($alias, bool $filter = false)
     {
@@ -24,7 +24,7 @@ class UserGroupQuery extends \Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuer
     /**
      * @param $title
      * @param bool $filter
-     * @return ActiveQuery|UserGroupQuery
+     * @return ActiveQuery|WorkerGroupQuery
      */
     public function byTitle($title, bool $filter = false)
     {

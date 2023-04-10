@@ -6,7 +6,7 @@ use Smoren\Yii2\AccessManager\models\query\ApiApiGroupQuery;
 use Smoren\Yii2\AccessManager\models\query\ApiGroupQuery;
 use Smoren\Yii2\AccessManager\models\query\ApiQuery;
 use Smoren\Yii2\AccessManager\models\query\PermissionQuery;
-use Smoren\Yii2\AccessManager\models\query\UserGroupQuery;
+use Smoren\Yii2\AccessManager\models\query\WorkerGroupQuery;
 use Smoren\Yii2\AccessManager\Module;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveRecord;
 use thamtech\uuid\validators\UuidValidator;
@@ -28,7 +28,7 @@ use yii\db\ActiveQuery;
  * @property ApiApiGroup[] $apiApiGroups
  * @property Api[] $apis
  * @property Permission[] $connections
- * @property UserGroup[] $userGroups
+ * @property WorkerGroup[] $workerGroups
  */
 class ApiGroup extends ActiveRecord
 {
@@ -107,14 +107,14 @@ class ApiGroup extends ActiveRecord
     }
 
     /**
-     * Gets query for [[UserGroups]].
+     * Gets query for [[WorkerGroups]].
      *
-     * @return ActiveQuery|UserGroupQuery
+     * @return ActiveQuery|WorkerGroupQuery
      * @throws InvalidConfigException
      */
-    public function getUserGroups()
+    public function getWorkerGroups()
     {
-        return $this->hasMany(UserGroup::class, ['id' => 'user_group_id'])->viaTable('access_connection', ['api_group_id' => 'id']);
+        return $this->hasMany(WorkerGroup::class, ['id' => 'worker_group_id'])->viaTable('access_connection', ['api_group_id' => 'id']);
     }
 
     /**

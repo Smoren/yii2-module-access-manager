@@ -22,12 +22,12 @@ class PermissionQuery extends ActiveQuery
     }
 
     /**
-     * @param $userGroupId
+     * @param $workerGroupId
      * @param bool $filter
      * @return PermissionQuery|ActiveQuery
      */
-    public function byUserGroup($userGroupId, bool $filter = false)
+    public function byWorkerGroup($workerGroupId, bool $filter = false)
     {
-        return $this->andWhereExtended([$this->aliasColumn('user_group_id') => $userGroupId], $filter);
+        return $this->andWhereExtended([$this->aliasColumn('worker_group_id') => $workerGroupId], $filter);
     }
 }

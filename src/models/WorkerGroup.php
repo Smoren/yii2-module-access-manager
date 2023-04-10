@@ -4,8 +4,8 @@ namespace Smoren\Yii2\AccessManager\models;
 
 use Smoren\Yii2\AccessManager\models\query\ApiGroupQuery;
 use Smoren\Yii2\AccessManager\models\query\PermissionQuery;
-use Smoren\Yii2\AccessManager\models\query\UserGroupQuery;
-use Smoren\Yii2\AccessManager\models\query\UserUserGroupQuery;
+use Smoren\Yii2\AccessManager\models\query\WorkerGroupQuery;
+use Smoren\Yii2\AccessManager\models\query\WorkerWorkerGroupQuery;
 use Smoren\Yii2\AccessManager\Module;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveRecord;
 use thamtech\uuid\validators\UuidValidator;
@@ -13,7 +13,7 @@ use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
 
 /**
- * This is the model class for table "access_user_group".
+ * This is the model class for table "access_worker_group".
  *
  * @property string $id
  * @property string $alias
@@ -24,16 +24,16 @@ use yii\db\ActiveQuery;
  *
  * @property Permission[] $connections
  * @property ApiGroup[] $apiGroups
- * @property UserUserGroup[] $userUserGroups
+ * @property WorkerWorkerGroup[] $workerWorkerGroups
  */
-class UserGroup extends ActiveRecord
+class WorkerGroup extends ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return Module::getDbTablePrefix().'_user_group';
+        return Module::getDbTablePrefix().'_worker_group';
     }
 
     /**
@@ -75,7 +75,7 @@ class UserGroup extends ActiveRecord
      */
     public function getConnections()
     {
-        return $this->hasMany(Permission::class, ['user_group_id' => 'id']);
+        return $this->hasMany(Permission::class, ['worker_group_id' => 'id']);
     }
 
     /**
@@ -86,25 +86,25 @@ class UserGroup extends ActiveRecord
      */
     public function getApiGroups()
     {
-        return $this->hasMany(ApiGroup::class, ['id' => 'api_group_id'])->viaTable('access_connection', ['user_group_id' => 'id']);
+        return $this->hasMany(ApiGroup::class, ['id' => 'api_group_id'])->viaTable('access_connection', ['worker_group_id' => 'id']);
     }
 
     /**
-     * Gets query for [[UserUserGroups]].
+     * Gets query for [[WorkerWorkerGroups]].
      *
-     * @return ActiveQuery|UserUserGroupQuery
+     * @return ActiveQuery|WorkerWorkerGroupQuery
      */
-    public function getUserUserGroups()
+    public function getWorkerWorkerGroups()
     {
-        return $this->hasMany(UserUserGroup::class, ['user_group_id' => 'id']);
+        return $this->hasMany(WorkerWorkerGroup::class, ['worker_group_id' => 'id']);
     }
 
     /**
      * {@inheritdoc}
-     * @return UserGroupQuery the active query used by this AR class.
+     * @return WorkerGroupQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new UserGroupQuery(get_called_class());
+        return new WorkerGroupQuery(get_called_class());
     }
 }

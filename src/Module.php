@@ -2,7 +2,6 @@
 
 namespace Smoren\Yii2\AccessManager;
 
-use Smoren\ExtendedExceptions\LogicException;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
 

@@ -4,11 +4,11 @@
 namespace Smoren\Yii2\AccessManager\controllers;
 
 
-use Smoren\Yii2\AccessManager\forms\api\ApiCreateForm;
-use Smoren\Yii2\AccessManager\forms\api\ApiFilterForm;
-use Smoren\Yii2\AccessManager\forms\api\ApiUpdateForm;
-use Smoren\Yii2\AccessManager\models\Api;
-use Smoren\Yii2\AccessManager\models\query\ApiQuery;
+use Smoren\Yii2\AccessManager\forms\worker_group\WorkerGroupCreateForm;
+use Smoren\Yii2\AccessManager\forms\worker_group\WorkerGroupFilterForm;
+use Smoren\Yii2\AccessManager\forms\worker_group\WorkerGroupUpdateForm;
+use Smoren\Yii2\AccessManager\models\query\WorkerGroupQuery;
+use Smoren\Yii2\AccessManager\models\WorkerGroup;
 use Smoren\Yii2\AccessManager\traits\AccessControlTrait;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
@@ -16,50 +16,48 @@ use Smoren\Yii2\Auth\controllers\RestControllerTrait;
 use Smoren\Yii2\Auth\controllers\WorkerTokenController;
 use Yii;
 
-class ApiController extends WorkerTokenController
+class WorkerGroupController extends WorkerTokenController
 {
     use RestControllerTrait;
     use AccessControlTrait;
 
     /**
      * @inheritDoc
-     * @return ApiCreateForm
+     * @return WorkerGroupCreateForm
      */
     protected function getCreateForm(): Model
     {
-        return ApiCreateForm::create(Yii::$app->request->bodyParams);
+        return WorkerGroupCreateForm::create(Yii::$app->request->bodyParams);
     }
 
     /**
      * @inheritDoc
-     * @return ApiUpdateForm
+     * @return WorkerGroupUpdateForm
      */
     protected function getUpdateForm(string $itemId, $item): Model
     {
-        return ApiUpdateForm::create(Yii::$app->request->bodyParams);
+        return WorkerGroupUpdateForm::create(Yii::$app->request->bodyParams);
     }
 
     /**
      * @inheritDoc
-     * @return ApiFilterForm
+     * @return WorkerGroupFilterForm
      */
     protected function getFilterForm(): Model
     {
-        return ApiFilterForm::create(Yii::$app->request->queryParams);
+        return WorkerGroupFilterForm::create(Yii::$app->request->queryParams);
     }
 
     /**
      * @inheritDoc
-     * @param ApiQuery|ActiveQuery $query
-     * @param ApiFilterForm $form
-     * @return ApiQuery|ActiveQuery
+     * @param WorkerGroupQuery|ActiveQuery $query
+     * @param WorkerGroupFilterForm $form
+     * @return WorkerGroupQuery|ActiveQuery
      */
     protected function workerFilter(ActiveQuery $query, ?Model $form): ActiveQuery
     {
         return $query
-            ->byApiGroup($form->api_group_id, true)
-            ->byMethod($form->method, true)
-            ->byPath($form->path, true)
+            ->byAlias($form->alias, true)
             ->byTitle($form->title, true);
     }
 
@@ -76,6 +74,6 @@ class ApiController extends WorkerTokenController
      */
     protected function getActiveRecordClassName(): string
     {
-        return Api::class;
+        return WorkerGroup::class;
     }
 }

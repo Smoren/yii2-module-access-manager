@@ -13,10 +13,10 @@ use Smoren\Yii2\AccessManager\traits\AccessControlTrait;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
 use Smoren\Yii2\Auth\controllers\RestControllerTrait;
-use Smoren\Yii2\Auth\controllers\UserTokenController;
+use Smoren\Yii2\Auth\controllers\WorkerTokenController;
 use Yii;
 
-class RuleController extends UserTokenController
+class RuleController extends WorkerTokenController
 {
     use RestControllerTrait;
     use AccessControlTrait;
@@ -54,7 +54,7 @@ class RuleController extends UserTokenController
      * @param RuleFilterForm $form
      * @return RuleQuery|ActiveQuery
      */
-    protected function userFilter(ActiveQuery $query, ?Model $form): ActiveQuery
+    protected function workerFilter(ActiveQuery $query, ?Model $form): ActiveQuery
     {
         return $query
             ->byAlias($form->alias, true)
@@ -64,7 +64,7 @@ class RuleController extends UserTokenController
     /**
      * @inheritDoc
      */
-    protected function userOrder(ActiveQuery $query, ?Model $form): ActiveQuery
+    protected function workerOrder(ActiveQuery $query, ?Model $form): ActiveQuery
     {
         return $query->orderBy(['title' => SORT_ASC]);
     }

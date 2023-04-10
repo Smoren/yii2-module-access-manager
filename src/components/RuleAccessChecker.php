@@ -10,9 +10,9 @@ use Smoren\Yii2\AccessManager\models\ApiApiGroup;
 use Smoren\Yii2\AccessManager\models\ApiGroup;
 use Smoren\Yii2\AccessManager\models\Permission;
 use Smoren\Yii2\AccessManager\models\Rule;
-use Smoren\Yii2\AccessManager\models\UserGroup;
-use Smoren\Yii2\AccessManager\models\UserGroupRule;
-use Smoren\Yii2\AccessManager\models\UserUserGroup;
+use Smoren\Yii2\AccessManager\models\WorkerGroup;
+use Smoren\Yii2\AccessManager\models\WorkerGroupRule;
+use Smoren\Yii2\AccessManager\models\WorkerWorkerGroup;
 use Smoren\ExtendedExceptions\BaseException;
 use Smoren\Yii2\Auth\exceptions\ApiException;
 use Smoren\Yii2\Auth\structs\StatusCode;
@@ -23,17 +23,17 @@ use yii\db\Query;
 
 class RuleAccessChecker
 {
-    protected $userId;
+    protected $workerId;
     protected $dbConn;
 
     public static function createFromRequestContext(?Connection $dbConn = null): self
     {
-        return new static(Yii::$app->user->identity->id, $dbConn);
+        return new static(Yii::$app->worker->identity->id, $dbConn);
     }
 
-    public function __construct(string $userId, ?Connection $dbConn = null)
+    public function __construct(string $workerId, ?Connection $dbConn = null)
     {
-        $this->userId = $userId;
+        $this->workerId = $workerId;
         $this->dbConn = $dbConn ?? Yii::$app->db;
     }
 
@@ -42,9 +42,9 @@ class RuleAccessChecker
         $grantCount = (new Query())
             ->select('ugr.rule_id')
             ->from(['r' => Rule::tableName()])
-            ->innerJoin(['ugr' => UserGroupRule::tableName()], 'ugr.rule_id = r.id')
-            ->innerJoin(['ug' => UserGroup::tableName()], 'ug.id = ugr.user_group_id')
-            ->innerJoin(['uug' => UserUserGroup::tableName()], 'uug.user_group_id = ug.id and uug.user_id = :user_id', [':user_id' => $this->userId])
+            ->innerJoin(['ugr' => WorkerGroupRule::tableName()], 'ugr.rule_id = r.id')
+            ->innerJoin(['ug' => WorkerGroup::tableName()], 'ug.id = ugr.worker_group_id')
+            ->innerJoin(['uug' => WorkerWorkerGroup::tableName()], 'uug.worker_group_id = ug.id and uug.worker_id = :worker_id', [':worker_id' => $this->workerId])
             ->andWhere(['r.alias' => $ruleAlias])
             ->count('ugr.rule_id', $this->dbConn);
 

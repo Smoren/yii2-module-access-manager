@@ -3,32 +3,32 @@
 namespace Smoren\Yii2\AccessManager\models;
 
 use Smoren\Yii2\AccessManager\models\query\RuleQuery;
-use Smoren\Yii2\AccessManager\models\query\UserGroupQuery;
-use Smoren\Yii2\AccessManager\models\query\UserGroupRuleQuery;
+use Smoren\Yii2\AccessManager\models\query\WorkerGroupQuery;
+use Smoren\Yii2\AccessManager\models\query\WorkerGroupRuleQuery;
 use Smoren\Yii2\AccessManager\Module;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveRecord;
 use thamtech\uuid\validators\UuidValidator;
 use yii\db\ActiveQuery;
 
 /**
- * This is the model class for table "access_user_group_rule".
+ * This is the model class for table "access_worker_group_rule".
  *
  * @property string $id
- * @property string $user_group_id
+ * @property string $worker_group_id
  * @property string $rule_id
  * @property int $created_at
  *
  * @property Rule $rule
- * @property UserGroup $userGroup
+ * @property WorkerGroup $workerGroup
  */
-class UserGroupRule extends ActiveRecord
+class WorkerGroupRule extends ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return Module::getDbTablePrefix().'_user_group_rule';
+        return Module::getDbTablePrefix().'_worker_group_rule';
     }
 
     /**
@@ -37,13 +37,13 @@ class UserGroupRule extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_group_id', 'rule_id'], 'required'],
-            [['user_group_id', 'rule_id'], UuidValidator::class],
+            [['worker_group_id', 'rule_id'], 'required'],
+            [['worker_group_id', 'rule_id'], UuidValidator::class],
             [['created_at'], 'default', 'value' => null],
             [['created_at'], 'integer'],
-            [['user_group_id', 'rule_id'], 'unique', 'targetAttribute' => ['user_group_id', 'rule_id']],
+            [['worker_group_id', 'rule_id'], 'unique', 'targetAttribute' => ['worker_group_id', 'rule_id']],
             [['rule_id'], 'exist', 'skipOnError' => true, 'targetClass' => Rule::class, 'targetAttribute' => ['rule_id' => 'id']],
-            [['user_group_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserGroup::class, 'targetAttribute' => ['user_group_id' => 'id']],
+            [['worker_group_id'], 'exist', 'skipOnError' => true, 'targetClass' => WorkerGroup::class, 'targetAttribute' => ['worker_group_id' => 'id']],
         ];
     }
 
@@ -53,7 +53,7 @@ class UserGroupRule extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'user_group_id' => 'User Group ID',
+            'worker_group_id' => 'Worker Group ID',
             'rule_id' => 'Rule ID',
             'created_at' => 'Created At',
         ];
@@ -70,21 +70,21 @@ class UserGroupRule extends ActiveRecord
     }
 
     /**
-     * Gets query for [[UserGroup]].
+     * Gets query for [[WorkerGroup]].
      *
-     * @return ActiveQuery|UserGroupQuery
+     * @return ActiveQuery|WorkerGroupQuery
      */
-    public function getUserGroup()
+    public function getWorkerGroup()
     {
-        return $this->hasOne(UserGroup::class, ['id' => 'user_group_id']);
+        return $this->hasOne(WorkerGroup::class, ['id' => 'worker_group_id']);
     }
 
     /**
      * {@inheritdoc}
-     * @return UserGroupRuleQuery the active query used by this AR class.
+     * @return WorkerGroupRuleQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new UserGroupRuleQuery(get_called_class());
+        return new WorkerGroupRuleQuery(get_called_class());
     }
 }

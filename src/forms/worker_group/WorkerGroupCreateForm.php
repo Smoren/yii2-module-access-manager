@@ -1,22 +1,22 @@
 <?php
 
-namespace Smoren\Yii2\AccessManager\forms\user_group;
+namespace Smoren\Yii2\AccessManager\forms\worker_group;
 
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
 
 /**
- * Model for creating user_group
+ * Model for creating worker_group
  *
- * @OA\Schema(schema="AccessManager\UserGroupCreateForm", type="object")
+ * @OA\Schema(schema="AccessManager\WorkerGroupCreateForm", type="object")
  */
-class UserGroupCreateForm extends Model
+class WorkerGroupCreateForm extends Model
 {
     /**
      * @OA\Property(
      *     property="alias",
      *     type="string",
-     *     example="user_group_alias",
-     *     description="User group alias"
+     *     example="worker_group_alias",
+     *     description="Worker group alias"
      * )
      */
     public $alias;
@@ -24,8 +24,8 @@ class UserGroupCreateForm extends Model
      * @OA\Property(
      *     property="title",
      *     type="string",
-     *     example="My user group name",
-     *     description="User group name"
+     *     example="My worker group name",
+     *     description="Worker group name"
      * )
      */
     public $title;

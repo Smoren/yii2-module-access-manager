@@ -48,76 +48,76 @@ class AccessTest extends Unit
             $this->assertTrue(true);
         }
 
-        $userGroup1 = AccessManager::createUserGroup('group1', 'test');
-        $userGroup2 = AccessManager::createUserGroup('group2', 'test');
+        $workerGroup1 = AccessManager::createWorkerGroup('group1', 'test');
+        $workerGroup2 = AccessManager::createWorkerGroup('group2', 'test');
 
         try {
-            AccessManager::createUserGroup('group1', 'test');
+            AccessManager::createWorkerGroup('group1', 'test');
             $this->assertTrue(false);
         } catch(DbException $e) {
             $this->assertTrue(true);
         }
 
-        $userId1 = $this->createUserId();
-        $userId2 = $this->createUserId();
+        $workerId1 = $this->createWorkerId();
+        $workerId2 = $this->createWorkerId();
 
-        AccessManager::linkUser($userId1, $userGroup1->id);
-        AccessManager::linkUser($userId1, $userGroup2->id);
-        AccessManager::linkUser($userId2, $userGroup2->id);
+        AccessManager::linkWorker($workerId1, $workerGroup1->id);
+        AccessManager::linkWorker($workerId1, $workerGroup2->id);
+        AccessManager::linkWorker($workerId2, $workerGroup2->id);
 
         try {
-            AccessManager::linkUser($userId2, $userGroup2->id);
+            AccessManager::linkWorker($workerId2, $workerGroup2->id);
             $this->assertTrue(false);
         } catch(DbException $e) {
             $this->assertTrue(true);
         }
 
-        $this->checkAccessDenied($userId1, $api1);
-        $this->checkAccessDenied($userId1, $api2);
-        $this->checkAccessDenied($userId2, $api1);
-        $this->checkAccessDenied($userId2, $api2);
+        $this->checkAccessDenied($workerId1, $api1);
+        $this->checkAccessDenied($workerId1, $api2);
+        $this->checkAccessDenied($workerId2, $api1);
+        $this->checkAccessDenied($workerId2, $api2);
 
-        AccessManager::createPermission($apiGroup1->id, $userGroup1->id);
-        $this->checkAccessGranted($userId1, $api1);
-        $this->checkAccessDenied($userId1, $api2);
-        $this->checkAccessDenied($userId2, $api1);
-        $this->checkAccessDenied($userId2, $api2);
+        AccessManager::createPermission($apiGroup1->id, $workerGroup1->id);
+        $this->checkAccessGranted($workerId1, $api1);
+        $this->checkAccessDenied($workerId1, $api2);
+        $this->checkAccessDenied($workerId2, $api1);
+        $this->checkAccessDenied($workerId2, $api2);
 
-        AccessManager::createPermission($apiGroup2->id, $userGroup2->id);
-        $this->checkAccessGranted($userId1, $api1);
-        $this->checkAccessGranted($userId1, $api2);
-        $this->checkAccessGranted($userId2, $api1);
-        $this->checkAccessGranted($userId2, $api2);
+        AccessManager::createPermission($apiGroup2->id, $workerGroup2->id);
+        $this->checkAccessGranted($workerId1, $api1);
+        $this->checkAccessGranted($workerId1, $api2);
+        $this->checkAccessGranted($workerId2, $api1);
+        $this->checkAccessGranted($workerId2, $api2);
 
-        AccessManager::unlinkUser($userId1, $userGroup2->id);
-        $this->checkAccessGranted($userId1, $api1);
-        $this->checkAccessDenied($userId1, $api2);
-        $this->checkAccessGranted($userId2, $api1);
-        $this->checkAccessGranted($userId2, $api2);
+        AccessManager::unlinkWorker($workerId1, $workerGroup2->id);
+        $this->checkAccessGranted($workerId1, $api1);
+        $this->checkAccessDenied($workerId1, $api2);
+        $this->checkAccessGranted($workerId2, $api1);
+        $this->checkAccessGranted($workerId2, $api2);
 
         AccessManager::unlinkApi($api1->id, $apiGroup2->id);
-        $this->checkAccessGranted($userId1, $api1);
-        $this->checkAccessDenied($userId1, $api2);
-        $this->checkAccessDenied($userId2, $api1);
-        $this->checkAccessGranted($userId2, $api2);
+        $this->checkAccessGranted($workerId1, $api1);
+        $this->checkAccessDenied($workerId1, $api2);
+        $this->checkAccessDenied($workerId2, $api1);
+        $this->checkAccessGranted($workerId2, $api2);
 
-        AccessManager::deletePermission($apiGroup2->id, $userGroup2->id);
-        $this->checkAccessGranted($userId1, $api1);
-        $this->checkAccessDenied($userId1, $api2);
-        $this->checkAccessDenied($userId2, $api1);
-        $this->checkAccessDenied($userId2, $api2);
+        AccessManager::deletePermission($apiGroup2->id, $workerGroup2->id);
+        $this->checkAccessGranted($workerId1, $api1);
+        $this->checkAccessDenied($workerId1, $api2);
+        $this->checkAccessDenied($workerId2, $api1);
+        $this->checkAccessDenied($workerId2, $api2);
 
-        AccessManager::deletePermission($apiGroup1->id, $userGroup1->id);
-        $this->checkAccessDenied($userId1, $api1);
-        $this->checkAccessDenied($userId1, $api2);
-        $this->checkAccessDenied($userId2, $api1);
-        $this->checkAccessDenied($userId2, $api2);
+        AccessManager::deletePermission($apiGroup1->id, $workerGroup1->id);
+        $this->checkAccessDenied($workerId1, $api1);
+        $this->checkAccessDenied($workerId1, $api2);
+        $this->checkAccessDenied($workerId2, $api1);
+        $this->checkAccessDenied($workerId2, $api2);
 
-        AccessManager::createPermission($apiGroup2->id, $userGroup1->id);
-        $this->checkAccessDenied($userId1, $api1);
-        $this->checkAccessGranted($userId1, $api2);
-        $this->checkAccessDenied($userId2, $api1);
-        $this->checkAccessDenied($userId2, $api2);
+        AccessManager::createPermission($apiGroup2->id, $workerGroup1->id);
+        $this->checkAccessDenied($workerId1, $api1);
+        $this->checkAccessGranted($workerId1, $api2);
+        $this->checkAccessDenied($workerId2, $api1);
+        $this->checkAccessDenied($workerId2, $api2);
     }
 
     public function testRuleAccess()
@@ -132,119 +132,119 @@ class AccessTest extends Unit
             $this->assertTrue(true);
         }
 
-        $userGroup1 = AccessManager::createUserGroup('group1', 'test');
-        $userGroup2 = AccessManager::createUserGroup('group2', 'test');
+        $workerGroup1 = AccessManager::createWorkerGroup('group1', 'test');
+        $workerGroup2 = AccessManager::createWorkerGroup('group2', 'test');
 
-        $userId1 = $this->createUserId();
-        $userId2 = $this->createUserId();
+        $workerId1 = $this->createWorkerId();
+        $workerId2 = $this->createWorkerId();
 
-        AccessManager::linkUser($userId1, $userGroup1->id);
-        AccessManager::linkUser($userId1, $userGroup2->id);
-        AccessManager::linkUser($userId2, $userGroup2->id);
+        AccessManager::linkWorker($workerId1, $workerGroup1->id);
+        AccessManager::linkWorker($workerId1, $workerGroup2->id);
+        AccessManager::linkWorker($workerId2, $workerGroup2->id);
 
-        $this->checkRuleDenied($userId1, $rule1);
-        $this->checkRuleDenied($userId1, $rule2);
-        $this->checkRuleDenied($userId2, $rule1);
-        $this->checkRuleDenied($userId2, $rule2);
+        $this->checkRuleDenied($workerId1, $rule1);
+        $this->checkRuleDenied($workerId1, $rule2);
+        $this->checkRuleDenied($workerId2, $rule1);
+        $this->checkRuleDenied($workerId2, $rule2);
 
-        AccessManager::linkRule($rule1->id, $userGroup1->id);
-        $this->checkRuleGranted($userId1, $rule1);
-        $this->checkRuleDenied($userId1, $rule2);
-        $this->checkRuleDenied($userId2, $rule1);
-        $this->checkRuleDenied($userId2, $rule2);
+        AccessManager::linkRule($rule1->id, $workerGroup1->id);
+        $this->checkRuleGranted($workerId1, $rule1);
+        $this->checkRuleDenied($workerId1, $rule2);
+        $this->checkRuleDenied($workerId2, $rule1);
+        $this->checkRuleDenied($workerId2, $rule2);
 
-        AccessManager::linkRule($rule2->id, $userGroup2->id);
-        $this->checkRuleGranted($userId1, $rule1);
-        $this->checkRuleGranted($userId1, $rule2);
-        $this->checkRuleDenied($userId2, $rule1);
-        $this->checkRuleGranted($userId2, $rule2);
+        AccessManager::linkRule($rule2->id, $workerGroup2->id);
+        $this->checkRuleGranted($workerId1, $rule1);
+        $this->checkRuleGranted($workerId1, $rule2);
+        $this->checkRuleDenied($workerId2, $rule1);
+        $this->checkRuleGranted($workerId2, $rule2);
 
         try {
-            AccessManager::linkRule($rule2->id, $userGroup2->id);
+            AccessManager::linkRule($rule2->id, $workerGroup2->id);
             $this->assertTrue(false);
         } catch(DbException $e) {
             $this->assertTrue(true);
         }
 
-        AccessManager::unlinkRule($rule1->id, $userGroup1->id);
-        $this->checkRuleDenied($userId1, $rule1);
-        $this->checkRuleGranted($userId1, $rule2);
-        $this->checkRuleDenied($userId2, $rule1);
-        $this->checkRuleGranted($userId2, $rule2);
+        AccessManager::unlinkRule($rule1->id, $workerGroup1->id);
+        $this->checkRuleDenied($workerId1, $rule1);
+        $this->checkRuleGranted($workerId1, $rule2);
+        $this->checkRuleDenied($workerId2, $rule1);
+        $this->checkRuleGranted($workerId2, $rule2);
 
-        AccessManager::unlinkUser($userId1, $userGroup2->id);
-        $this->checkRuleDenied($userId1, $rule1);
-        $this->checkRuleDenied($userId1, $rule2);
-        $this->checkRuleDenied($userId2, $rule1);
-        $this->checkRuleGranted($userId2, $rule2);
+        AccessManager::unlinkWorker($workerId1, $workerGroup2->id);
+        $this->checkRuleDenied($workerId1, $rule1);
+        $this->checkRuleDenied($workerId1, $rule2);
+        $this->checkRuleDenied($workerId2, $rule1);
+        $this->checkRuleGranted($workerId2, $rule2);
 
-        AccessManager::unlinkRule($rule2->id, $userGroup2->id);
-        $this->checkRuleDenied($userId1, $rule1);
-        $this->checkRuleDenied($userId1, $rule2);
-        $this->checkRuleDenied($userId2, $rule1);
-        $this->checkRuleDenied($userId2, $rule2);
+        AccessManager::unlinkRule($rule2->id, $workerGroup2->id);
+        $this->checkRuleDenied($workerId1, $rule1);
+        $this->checkRuleDenied($workerId1, $rule2);
+        $this->checkRuleDenied($workerId2, $rule1);
+        $this->checkRuleDenied($workerId2, $rule2);
 
-        AccessManager::linkRule($rule2->id, $userGroup1->id);
-        $this->checkRuleDenied($userId1, $rule1);
-        $this->checkRuleGranted($userId1, $rule2);
-        $this->checkRuleDenied($userId2, $rule1);
-        $this->checkRuleDenied($userId2, $rule2);
+        AccessManager::linkRule($rule2->id, $workerGroup1->id);
+        $this->checkRuleDenied($workerId1, $rule1);
+        $this->checkRuleGranted($workerId1, $rule2);
+        $this->checkRuleDenied($workerId2, $rule1);
+        $this->checkRuleDenied($workerId2, $rule2);
     }
 
-    protected function checkAccessGranted(string $userId, Api $api)
+    protected function checkAccessGranted(string $workerId, Api $api)
     {
-        $checker = new ApiAccessChecker($api->method, $api->path, $userId);
+        $checker = new ApiAccessChecker($api->method, $api->path, $workerId);
         $checker->checkAccess();
     }
 
-    protected function checkAccessDenied(string $userId, Api $api)
+    protected function checkAccessDenied(string $workerId, Api $api)
     {
         try {
-            $this->checkAccessGranted($userId, $api);
+            $this->checkAccessGranted($workerId, $api);
             $this->assertTrue(false);
         } catch(ApiException $e) {
             $this->assertEquals(StatusCode::FORBIDDEN, $e->getCode());
         }
     }
 
-    protected function checkRuleGranted(string $userId, Rule $rule)
+    protected function checkRuleGranted(string $workerId, Rule $rule)
     {
-        $checker = new RuleAccessChecker($userId);
+        $checker = new RuleAccessChecker($workerId);
         $checker->checkAccess($rule->alias);
     }
 
-    protected function checkRuleDenied(string $userId, Rule $rule)
+    protected function checkRuleDenied(string $workerId, Rule $rule)
     {
         try {
-            $this->checkRuleGranted($userId, $rule);
+            $this->checkRuleGranted($workerId, $rule);
             $this->assertTrue(false);
         } catch(ApiException $e) {
             $this->assertEquals(StatusCode::FORBIDDEN, $e->getCode());
         }
     }
 
-    protected function createUserId()
+    protected function createWorkerId()
     {
-        $userClass = Yii::$app->user->identityClass;
+        $workerClass = Yii::$app->worker->identityClass;
 
-        if(method_exists($userClass, 'createTestUser')) {
-            return $userClass::createTestUser();
+        if(method_exists($workerClass, 'createTestWorker')) {
+            return $workerClass::createTestWorker();
         }
 
         try {
-            $user = new $userClass();
-            $user->email = uniqid().'@'.uniqid().'.com';
-            $user->setPassword(uniqid().uniqid().'!@1a');
+            $worker = new $workerClass();
+            $worker->email = uniqid().'@'.uniqid().'.com';
+            $worker->setPassword(uniqid().uniqid().'!@1a');
 
-            if(method_exists($userClass, 'generateAuthKey')) {
-                $user->generateAuthKey();
+            if(method_exists($workerClass, 'generateAuthKey')) {
+                $worker->generateAuthKey();
             }
 
-            if(!$user->save()) {
-                throw new DbException('caanot create user', 1);
+            if(!$worker->save()) {
+                throw new DbException('caanot create worker', 1);
             }
 
-            return $user->id;
+            return $worker->id;
         } catch(DbException $e) {
             return $this->generatePseudoUuid();
         }

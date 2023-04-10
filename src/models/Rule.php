@@ -3,8 +3,8 @@
 namespace Smoren\Yii2\AccessManager\models;
 
 use Smoren\Yii2\AccessManager\models\query\RuleQuery;
-use Smoren\Yii2\AccessManager\models\query\UserGroupQuery;
-use Smoren\Yii2\AccessManager\models\query\UserGroupRuleQuery;
+use Smoren\Yii2\AccessManager\models\query\WorkerGroupQuery;
+use Smoren\Yii2\AccessManager\models\query\WorkerGroupRuleQuery;
 use Smoren\Yii2\AccessManager\Module;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveRecord;
 use thamtech\uuid\validators\UuidValidator;
@@ -21,8 +21,8 @@ use yii\db\ActiveQuery;
  * @property int $created_at
  * @property int|null $updated_at
  *
- * @property UserGroupRule[] $accessUserGroupRules
- * @property UserGroup[] $userGroups
+ * @property WorkerGroupRule[] $accessWorkerGroupRules
+ * @property WorkerGroup[] $workerGroups
  */
 class Rule extends ActiveRecord
 {
@@ -67,25 +67,25 @@ class Rule extends ActiveRecord
     }
 
     /**
-     * Gets query for [[AccessUserGroupRules]].
+     * Gets query for [[AccessWorkerGroupRules]].
      *
-     * @return ActiveQuery|UserGroupRuleQuery
+     * @return ActiveQuery|WorkerGroupRuleQuery
      */
-    public function getAccessUserGroupRules()
+    public function getAccessWorkerGroupRules()
     {
-        return $this->hasMany(UserGroupRule::class, ['rule_id' => 'id']);
+        return $this->hasMany(WorkerGroupRule::class, ['rule_id' => 'id']);
     }
 
     /**
-     * Gets query for [[UserGroups]].
+     * Gets query for [[WorkerGroups]].
      *
-     * @return ActiveQuery|UserGroupQuery
+     * @return ActiveQuery|WorkerGroupQuery
      * @throws InvalidConfigException
      */
-    public function getUserGroups()
+    public function getWorkerGroups()
     {
-        return $this->hasMany(UserGroup::class, ['id' => 'user_group_id'])
-            ->viaTable('access_user_group_rule', ['rule_id' => 'id']);
+        return $this->hasMany(WorkerGroup::class, ['id' => 'worker_group_id'])
+            ->viaTable('access_worker_group_rule', ['rule_id' => 'id']);
     }
 
     /**
