@@ -236,11 +236,7 @@ class AccessTest extends Unit
 
     protected function createWorkerId()
     {
-        $workerClass = Yii::$app->worker->identityClass;
-
-        if(method_exists($workerClass, 'createTestWorker')) {
-            return $workerClass::createTestWorker();
-        }
+        $workerClass = Yii::$app->user->identityClass;
 
         try {
             $worker = new $workerClass();
