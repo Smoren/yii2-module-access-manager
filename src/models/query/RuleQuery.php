@@ -2,7 +2,10 @@
 
 namespace Smoren\Yii2\AccessManager\models\query;
 
+use Smoren\Yii2\AccessManager\models\Rule;
+use Smoren\Yii2\ActiveRecordExplicit\exceptions\DbException;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
+use yii\db\Connection;
 
 /**
  * This is the ActiveQuery class for [[\Smoren\Yii2\AccessManager\models\Rule]].
@@ -31,4 +34,32 @@ class RuleQuery extends ActiveQuery
         return $this->andWhereExtended([$this->aliasColumn('title') => $title], $filter);
     }
 
+    /**
+     * @param Connection|null $db
+     * @return array|Rule
+     * @throws DbException
+     */
+    public function one($db = null)
+    {
+        return parent::one($db);
+    }
+
+    /**
+     * @param Connection|null $db
+     * @return array|Rule
+     * @throws DbException
+     */
+    public function first($db = null)
+    {
+        return parent::first($db);
+    }
+
+    /**
+     * @param Connection|null $db
+     * @return array|Rule[]
+     */
+    public function all($db = null): array
+    {
+        return parent::all($db);
+    }
 }

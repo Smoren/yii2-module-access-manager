@@ -2,7 +2,10 @@
 
 namespace Smoren\Yii2\AccessManager\models\query;
 
+use Smoren\Yii2\AccessManager\models\Api;
+use Smoren\Yii2\ActiveRecordExplicit\exceptions\DbException;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
+use yii\db\Connection;
 
 /**
  * This is the ActiveQuery class for [[\Smoren\Yii2\AccessManager\models\Api]].
@@ -49,5 +52,34 @@ class ApiQuery extends ActiveQuery
     public function byPath($path, bool $filter = false)
     {
         return $this->andWhereExtended([$this->aliasColumn('path') => $path], $filter);
+    }
+
+    /**
+     * @param Connection|null $db
+     * @return array|Api
+     * @throws DbException
+     */
+    public function one($db = null)
+    {
+        return parent::one($db);
+    }
+
+    /**
+     * @param Connection|null $db
+     * @return array|Api
+     * @throws DbException
+     */
+    public function first($db = null)
+    {
+        return parent::first($db);
+    }
+
+    /**
+     * @param Connection|null $db
+     * @return array|Api[]
+     */
+    public function all($db = null): array
+    {
+        return parent::all($db);
     }
 }
