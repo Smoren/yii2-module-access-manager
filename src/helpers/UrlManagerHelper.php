@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Smoren\Yii2\AccessManager\helpers;
-
 
 use Smoren\ExtendedExceptions\LogicException;
 use Yii;

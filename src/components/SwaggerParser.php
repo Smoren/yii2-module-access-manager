@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Smoren\Yii2\AccessManager\components;
-
 
 use Smoren\Yii2\AccessManager\models\Api;
 use Smoren\ExtendedExceptions\BadDataException;

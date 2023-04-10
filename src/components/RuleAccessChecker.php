@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Smoren\Yii2\AccessManager\components;
-
 
 use Smoren\Yii2\AccessManager\helpers\UrlManagerHelper;
 use Smoren\Yii2\AccessManager\interfaces\WorkerRepositoryInterface;

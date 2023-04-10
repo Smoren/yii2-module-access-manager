@@ -2,6 +2,15 @@
 
 namespace Smoren\Yii2\AccessManager;
 
+use Smoren\Yii2\AccessManager\controllers\ApiController;
+use Smoren\Yii2\AccessManager\controllers\ApiGroupController;
+use Smoren\Yii2\AccessManager\controllers\RuleController;
+use Smoren\Yii2\AccessManager\controllers\WorkerGroupController;
+use Smoren\Yii2\AccessManager\interfaces\ApiControllerInterface;
+use Smoren\Yii2\AccessManager\interfaces\ApiGroupControllerInterface;
+use Smoren\Yii2\AccessManager\interfaces\RuleControllerInterface;
+use Smoren\Yii2\AccessManager\interfaces\WorkerGroupControllerInterface;
+use Yii;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
 
@@ -34,35 +43,23 @@ class Module extends \yii\base\Module implements BootstrapInterface
             $this->controllerNamespace = 'Smoren\Yii2\AccessManager\commands';
         }
 
-        $app->getUrlManager()->addRules([
-            /**
-             * API авторизации
-             * @see IndexController::actionTest()
-             *
-             * @OA\PathItem(
-             *   path="/access/test/{id}",
-             *   @OA\Get(
-             *     summary="Access test",
-             *     tags={"access"},
-             *     security={{"apiKey": {}}},
-             *     @OA\Parameter(
-             *         name="id",
-             *         in="path",
-             *         description="id",
-             *         required=true,
-             *         @OA\Schema(type="integer"),
-             *     ),
-             *     @OA\Response(
-             *       response=200,
-             *       description="OK",
-             *       @OA\MediaType(
-             *         mediaType="application/json",
-             *       ),
-             *     ),
-             *   )
-             * )
-             */
-            'GET /access/test/<id:\d+>' => 'access/index/test',
-        ], false);
+        $uuidRegexp = '\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b';
+
+        $this->setDefaultController(ApiControllerInterface::class, ApiController::class);
+        $this->setDefaultController(ApiGroupControllerInterface::class, ApiGroupController::class);
+        $this->setDefaultController(RuleControllerInterface::class, RuleController::class);
+        $this->setDefaultController(WorkerGroupControllerInterface::class, WorkerGroupController::class);
+
+        $app->getUrlManager()->addRules(ApiController::getRules("/{$this->id}", "{$this->id}/api", $uuidRegexp));
+        $app->getUrlManager()->addRules(ApiGroupController::getRules("/{$this->id}", "{$this->id}/api-group", $uuidRegexp));
+        $app->getUrlManager()->addRules(RuleController::getRules("/{$this->id}", "{$this->id}/rule", $uuidRegexp));
+        $app->getUrlManager()->addRules(WorkerGroupController::getRules("/{$this->id}", "{$this->id}/worker-group", $uuidRegexp));
+    }
+
+    protected function setDefaultController(string $interface, string $class): void
+    {
+        if (!Yii::$container->has($interface)) {
+            Yii::$container->set($interface, $class);
+        }
     }
 }

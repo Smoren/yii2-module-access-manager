@@ -1,25 +1,22 @@
 <?php
 
-
 namespace Smoren\Yii2\AccessManager\controllers;
-
 
 use Smoren\Yii2\AccessManager\forms\api\ApiCreateForm;
 use Smoren\Yii2\AccessManager\forms\api\ApiFilterForm;
 use Smoren\Yii2\AccessManager\forms\api\ApiUpdateForm;
+use Smoren\Yii2\AccessManager\interfaces\ApiControllerInterface;
 use Smoren\Yii2\AccessManager\models\Api;
 use Smoren\Yii2\AccessManager\models\query\ApiQuery;
-use Smoren\Yii2\AccessManager\traits\AccessControlTrait;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
+use Smoren\Yii2\Auth\controllers\BaseController;
 use Smoren\Yii2\Auth\controllers\RestControllerTrait;
-use Smoren\Yii2\Auth\controllers\WorkerTokenController;
 use Yii;
 
-class ApiController extends WorkerTokenController
+class ApiController extends BaseController implements ApiControllerInterface
 {
     use RestControllerTrait;
-    use AccessControlTrait;
 
     /**
      * @inheritDoc
@@ -54,7 +51,7 @@ class ApiController extends WorkerTokenController
      * @param ApiFilterForm $form
      * @return ApiQuery|ActiveQuery
      */
-    protected function workerFilter(ActiveQuery $query, ?Model $form): ActiveQuery
+    protected function userFilter(ActiveQuery $query, ?Model $form): ActiveQuery
     {
         return $query
             ->byApiGroup($form->api_group_id, true)
@@ -66,7 +63,7 @@ class ApiController extends WorkerTokenController
     /**
      * @inheritDoc
      */
-    protected function workerOrder(ActiveQuery $query, ?Model $form): ActiveQuery
+    protected function userOrder(ActiveQuery $query, ?Model $form): ActiveQuery
     {
         return $query->orderBy(['title' => SORT_ASC]);
     }

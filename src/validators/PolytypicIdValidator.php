@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Smoren\Yii2\AccessManager\validators;
-
 
 use Smoren\ExtendedExceptions\LogicException;
 use yii\base\InvalidConfigException;
