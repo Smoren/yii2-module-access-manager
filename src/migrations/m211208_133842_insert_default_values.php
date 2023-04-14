@@ -1,7 +1,5 @@
 <?php
 
-namespace Smoren\Yii2\AccessManager\migrations;
-
 use Smoren\Yii2\AccessManager\Module;
 use Smoren\Yii2\ActiveRecordExplicit\models\Migration;
 use yii\db\Query;
