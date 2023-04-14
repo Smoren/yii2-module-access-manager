@@ -5,16 +5,14 @@ namespace Smoren\Yii2\AccessManager\controllers;
 use Smoren\Yii2\AccessManager\forms\rule\RuleCreateForm;
 use Smoren\Yii2\AccessManager\forms\rule\RuleFilterForm;
 use Smoren\Yii2\AccessManager\forms\rule\RuleUpdateForm;
-use Smoren\Yii2\AccessManager\interfaces\RuleControllerInterface;
 use Smoren\Yii2\AccessManager\models\query\RuleQuery;
 use Smoren\Yii2\AccessManager\models\Rule;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
-use Smoren\Yii2\Auth\controllers\BaseController;
 use Smoren\Yii2\Auth\controllers\RestControllerTrait;
 use Yii;
 
-class RuleController extends BaseController implements RuleControllerInterface
+class RuleController extends CommonController
 {
     use RestControllerTrait;
 

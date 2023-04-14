@@ -5,16 +5,14 @@ namespace Smoren\Yii2\AccessManager\controllers;
 use Smoren\Yii2\AccessManager\forms\api_group\ApiGroupCreateForm;
 use Smoren\Yii2\AccessManager\forms\api_group\ApiGroupFilterForm;
 use Smoren\Yii2\AccessManager\forms\api_group\ApiGroupUpdateForm;
-use Smoren\Yii2\AccessManager\interfaces\ApiGroupControllerInterface;
 use Smoren\Yii2\AccessManager\models\ApiGroup;
 use Smoren\Yii2\AccessManager\models\query\ApiGroupQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
-use Smoren\Yii2\Auth\controllers\BaseController;
 use Smoren\Yii2\Auth\controllers\RestControllerTrait;
 use Yii;
 
-class ApiGroupController extends BaseController implements ApiGroupControllerInterface
+class ApiGroupController extends CommonController
 {
     use RestControllerTrait;
 

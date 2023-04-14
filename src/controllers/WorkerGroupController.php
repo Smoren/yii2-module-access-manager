@@ -5,16 +5,14 @@ namespace Smoren\Yii2\AccessManager\controllers;
 use Smoren\Yii2\AccessManager\forms\worker_group\WorkerGroupCreateForm;
 use Smoren\Yii2\AccessManager\forms\worker_group\WorkerGroupFilterForm;
 use Smoren\Yii2\AccessManager\forms\worker_group\WorkerGroupUpdateForm;
-use Smoren\Yii2\AccessManager\interfaces\WorkerGroupControllerInterface;
 use Smoren\Yii2\AccessManager\models\query\WorkerGroupQuery;
 use Smoren\Yii2\AccessManager\models\WorkerGroup;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
-use Smoren\Yii2\Auth\controllers\BaseController;
 use Smoren\Yii2\Auth\controllers\RestControllerTrait;
 use Yii;
 
-class WorkerGroupController extends BaseController implements WorkerGroupControllerInterface
+class WorkerGroupController extends CommonController
 {
     use RestControllerTrait;
 

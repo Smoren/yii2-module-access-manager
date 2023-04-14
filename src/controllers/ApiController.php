@@ -5,16 +5,14 @@ namespace Smoren\Yii2\AccessManager\controllers;
 use Smoren\Yii2\AccessManager\forms\api\ApiCreateForm;
 use Smoren\Yii2\AccessManager\forms\api\ApiFilterForm;
 use Smoren\Yii2\AccessManager\forms\api\ApiUpdateForm;
-use Smoren\Yii2\AccessManager\interfaces\ApiControllerInterface;
 use Smoren\Yii2\AccessManager\models\Api;
 use Smoren\Yii2\AccessManager\models\query\ApiQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
-use Smoren\Yii2\Auth\controllers\BaseController;
 use Smoren\Yii2\Auth\controllers\RestControllerTrait;
 use Yii;
 
-class ApiController extends BaseController implements ApiControllerInterface
+class ApiController extends CommonController
 {
     use RestControllerTrait;
 
