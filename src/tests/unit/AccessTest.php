@@ -201,7 +201,7 @@ class AccessTest extends Unit
 
     protected function checkAccessGranted(string $workerId, Api $api)
     {
-        $checker = new ApiAccessChecker($api->method, $api->path, $workerId);
+        $checker = new ApiAccessChecker($api->method, $api->path, [$workerId]);
         $checker->checkAccess();
     }
 
@@ -217,7 +217,7 @@ class AccessTest extends Unit
 
     protected function checkRuleGranted(string $workerId, Rule $rule)
     {
-        $checker = new RuleAccessChecker($workerId);
+        $checker = new RuleAccessChecker([$workerId]);
         $checker->checkAccess($rule->alias);
     }
 
