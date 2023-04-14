@@ -42,6 +42,18 @@ class m211208_133842_insert_default_values extends Migration
                 ['get', "/{$tablePrefix}/rule/{id}", 'Get Rule item'],
                 ['put', "/{$tablePrefix}/rule/{id}", 'Update Rule item'],
                 ['delete', "/{$tablePrefix}/rule/{id}", 'Delete Rule item'],
+
+                ['post', "/{$tablePrefix}/api-api-group", 'Create link for API and API group'],
+                ['delete', "/{$tablePrefix}/api-api-group", 'Delete link for API and API group'],
+
+                ['post', "/{$tablePrefix}/worker-worker-group", 'Create link for Worker and Worker group'],
+                ['delete', "/{$tablePrefix}/worker-worker-group", 'Delete link for Worker and Worker group'],
+
+                ['post', "/{$tablePrefix}/permission", 'Create link for API group and Worker group'],
+                ['delete', "/{$tablePrefix}/permission", 'Delete link for API group and Worker group'],
+
+                ['post', "/{$tablePrefix}/worker-group-rule", 'Create link for Rule and Worker group'],
+                ['delete', "/{$tablePrefix}/worker-group-rule", 'Delete link for Rule and Worker group'],
             ]
         );
 
