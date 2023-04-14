@@ -41,6 +41,10 @@
   "config": {
     "fxp-asset": {
       "enabled": false
+    },
+    "allow-plugins": {
+      "smoren/mushroom-hook-manager": true,
+      "yiisoft/yii2-composer": true
     }
   },
   "repositories": [
