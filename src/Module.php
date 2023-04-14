@@ -45,10 +45,10 @@ class Module extends \yii\base\Module implements BootstrapInterface
 
         $this->setDefaultDiClass(BehaviorFactoryInterface::class, BehaviorFactory::class);
 
-        $app->getUrlManager()->addRules(ApiController::getRules("/{$this->id}", "{$this->id}/api", $uuidRegexp));
-        $app->getUrlManager()->addRules(ApiGroupController::getRules("/{$this->id}", "{$this->id}/api-group", $uuidRegexp));
-        $app->getUrlManager()->addRules(RuleController::getRules("/{$this->id}", "{$this->id}/rule", $uuidRegexp));
-        $app->getUrlManager()->addRules(WorkerGroupController::getRules("/{$this->id}", "{$this->id}/worker-group", $uuidRegexp));
+        $app->getUrlManager()->addRules(ApiController::getRules("/{$this->id}/api", "{$this->id}/api", $uuidRegexp));
+        $app->getUrlManager()->addRules(ApiGroupController::getRules("/{$this->id}/api-group", "{$this->id}/api-group", $uuidRegexp));
+        $app->getUrlManager()->addRules(RuleController::getRules("/{$this->id}/rule", "{$this->id}/rule", $uuidRegexp));
+        $app->getUrlManager()->addRules(WorkerGroupController::getRules("/{$this->id}/worker-group", "{$this->id}/worker-group", $uuidRegexp));
     }
 
     protected function setDefaultDiClass(string $interface, string $class): void
