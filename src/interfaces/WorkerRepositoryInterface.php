@@ -4,5 +4,8 @@ namespace Smoren\Yii2\AccessManager\interfaces;
 
 interface WorkerRepositoryInterface
 {
-    public function getWorkerFromRequestContext(): WorkerInterface;
+    /**
+     * @return array<string>
+     */
+    public function getWorkerIdsFromRequestContext(): array;
 }

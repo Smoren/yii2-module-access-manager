@@ -22,20 +22,26 @@ use yii\db\Query;
 
 class RuleAccessChecker
 {
-    protected $workerId;
+    /**
+     * @var array<string>
+     */
+    protected $workerIds;
+    /**
+     * @var Connection
+     */
     protected $dbConn;
 
     public static function createFromRequestContext(?Connection $dbConn = null): self
     {
         return new static(
-            Yii::createObject(WorkerRepositoryInterface::class)->getWorkerFromRequestContext(),
+            Yii::createObject(WorkerRepositoryInterface::class)->getWorkerIdsFromRequestContext(),
             $dbConn
         );
     }
 
-    public function __construct(string $workerId, ?Connection $dbConn = null)
+    public function __construct(array $workerIds, ?Connection $dbConn = null)
     {
-        $this->workerId = $workerId;
+        $this->workerIds = $workerIds;
         $this->dbConn = $dbConn ?? Yii::$app->db;
     }
 
@@ -46,7 +52,8 @@ class RuleAccessChecker
             ->from(['r' => Rule::tableName()])
             ->innerJoin(['ugr' => WorkerGroupRule::tableName()], 'ugr.rule_id = r.id')
             ->innerJoin(['ug' => WorkerGroup::tableName()], 'ug.id = ugr.worker_group_id')
-            ->innerJoin(['uug' => WorkerWorkerGroup::tableName()], 'uug.worker_group_id = ug.id and uug.worker_id = :worker_id', [':worker_id' => $this->workerId])
+            ->innerJoin(['uug' => WorkerWorkerGroup::tableName()], 'uug.worker_group_id = ug.id')
+            ->andWhere(['uug.worker_id' => $this->workerIds])
             ->andWhere(['r.alias' => $ruleAlias])
             ->count('ugr.rule_id', $this->dbConn);
 

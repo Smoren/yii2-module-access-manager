@@ -8,9 +8,7 @@ use Smoren\Yii2\AccessManager\controllers\RuleController;
 use Smoren\Yii2\AccessManager\controllers\WorkerGroupController;
 use Smoren\Yii2\AccessManager\helpers\BehaviorFactory;
 use Smoren\Yii2\AccessManager\interfaces\BehaviorFactoryInterface;
-use Smoren\Yii2\AccessManager\interfaces\WorkerInterface;
 use Smoren\Yii2\AccessManager\interfaces\WorkerRepositoryInterface;
-use Smoren\Yii2\AccessManager\models\Worker;
 use Smoren\Yii2\AccessManager\repository\WorkerRepository;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
@@ -49,7 +47,6 @@ class Module extends \yii\base\Module implements BootstrapInterface
 
         $this->setDefaultDiClass(BehaviorFactoryInterface::class, BehaviorFactory::class);
         $this->setDefaultDiClass(WorkerRepositoryInterface::class, WorkerRepository::class);
-        $this->setDefaultDiClass(WorkerInterface::class, Worker::class);
 
         $app->getUrlManager()->addRules(ApiController::getRules("/{$this->id}/api", "{$this->id}/api", $uuidRegexp));
         $app->getUrlManager()->addRules(ApiGroupController::getRules("/{$this->id}/api-group", "{$this->id}/api-group", $uuidRegexp));
