@@ -2,15 +2,13 @@
 
 namespace Smoren\Yii2\AccessManager\repository;
 
-use Smoren\Yii2\AccessManager\interfaces\WorkerInterface;
 use Smoren\Yii2\AccessManager\interfaces\WorkerRepositoryInterface;
-use Smoren\Yii2\AccessManager\models\Worker;
 use Yii;
 
 class WorkerRepository implements WorkerRepositoryInterface
 {
-    public function getWorkerFromRequestContext(): WorkerInterface
+    public function getWorkerIdsFromRequestContext(): array
     {
-        return new Worker(Yii::$app->user->identity);
+        return [Yii::$app->user->identity->getId()];
     }
 }

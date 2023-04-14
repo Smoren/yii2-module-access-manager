@@ -20,7 +20,7 @@ class ApiAccessChecker
 {
     protected $method;
     protected $path;
-    protected $workerId;
+    protected $workerIds;
     protected $dbConn;
     protected $methodsExcept = [];
 
@@ -30,16 +30,16 @@ class ApiAccessChecker
         return new static(
             $method,
             $path,
-            Yii::createObject(WorkerRepositoryInterface::class)->getWorkerFromRequestContext()->getId(),
+            Yii::createObject(WorkerRepositoryInterface::class)->getWorkerIdsFromRequestContext(),
             $dbConn
         );
     }
 
-    public function __construct(string $method, string $path, string $workerId, ?Connection $dbConn = null)
+    public function __construct(string $method, string $path, array $workerIds, ?Connection $dbConn = null)
     {
         $this->method = $method;
         $this->path = $path;
-        $this->workerId = $workerId;
+        $this->workerIds = $workerIds;
         $this->dbConn = $dbConn ?? Yii::$app->db;
     }
 
@@ -62,7 +62,8 @@ class ApiAccessChecker
             ->innerJoin(['ag' => ApiGroup::tableName()], 'ag.id = aag.api_group_id')
             ->innerJoin(['p' => Permission::tableName()], 'p.api_group_id = ag.id')
             ->innerJoin(['ug' => WorkerGroup::tableName()], 'ug.id = p.worker_group_id')
-            ->innerJoin(['uug' => WorkerWorkerGroup::tableName()], 'uug.worker_group_id = ug.id and uug.worker_id = :worker_id', [':worker_id' => $this->workerId])
+            ->innerJoin(['uug' => WorkerWorkerGroup::tableName()], 'uug.worker_group_id = ug.id')
+            ->andWhere(['uug.worker_id' => $this->workerIds])
             ->andWhere(['a.method' => $this->method])
             ->andWhere(['a.path' => $this->path])
             ->count('p.api_group_id', $this->dbConn);
@@ -76,7 +77,7 @@ class ApiAccessChecker
 
     public function checkRule(string $ruleAlias): self
     {
-        (new RuleAccessChecker($this->workerId, $this->dbConn))->checkAccess($ruleAlias);
+        (new RuleAccessChecker($this->workerIds, $this->dbConn))->checkAccess($ruleAlias);
         return $this;
     }
 }
