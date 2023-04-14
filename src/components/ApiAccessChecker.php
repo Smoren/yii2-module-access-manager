@@ -30,7 +30,7 @@ class ApiAccessChecker
         return new static(
             $method,
             $path,
-            Yii::createObject(WorkerRepositoryInterface::class)->getWorkerFromRequestContext(),
+            Yii::createObject(WorkerRepositoryInterface::class)->getWorkerFromRequestContext()->getId(),
             $dbConn
         );
     }
