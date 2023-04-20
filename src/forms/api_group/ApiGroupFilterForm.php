@@ -56,7 +56,6 @@ class ApiGroupFilterForm extends Model
         return [
             [['alias', 'title'], 'string'],
             [['in_menu', 'is_system'], 'boolean'],
-            [['in_menu', 'is_system'], 'default', 'value' => false],
             [['alias', 'title'], 'string', 'max' => 255],
         ];
     }
