@@ -29,14 +29,23 @@ class WorkerGroupFilterForm extends Model
      * )
      */
     public $title;
+    /**
+     * @OA\Property(
+     *     property="worker_id",
+     *     type="string",
+     *     example="worker_id",
+     *     description="Worker ID"
+     * )
+     */
+    public $worker_id;
 
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['alias', 'title'], 'string'],
+            [['alias', 'title', 'worker_id'], 'string'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];
     }

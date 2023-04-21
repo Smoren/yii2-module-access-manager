@@ -3,6 +3,7 @@
 namespace Smoren\Yii2\AccessManager\models\query;
 
 use Smoren\Yii2\AccessManager\models\WorkerGroup;
+use Smoren\Yii2\AccessManager\models\WorkerWorkerGroup;
 use Smoren\Yii2\ActiveRecordExplicit\exceptions\DbException;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use yii\db\Connection;
@@ -32,6 +33,26 @@ class WorkerGroupQuery extends \Smoren\Yii2\ActiveRecordExplicit\models\ActiveQu
     public function byTitle($title, bool $filter = false)
     {
         return $this->andWhereExtended([$this->aliasColumn('title') => $title], $filter);
+    }
+
+    /**
+     * @param $workerId
+     * @return ActiveQuery|WorkerGroupQuery
+     */
+    public function byWorker($workerId)
+    {
+        if (empty($workerId)) {
+            return $this;
+        }
+
+        $workerGroupIds = WorkerGroup::find()
+            ->alias('wg')
+            ->innerJoin(['wwg' => WorkerWorkerGroup::tableName()], 'wwg.worker_id = wg.id')
+            ->andWhere(['wwg.worker_id' => $workerId])
+            ->select('wg.id')
+            ->column();
+
+        return $this->andWhereExtended([$this->aliasColumn('id') => $workerGroupIds]);
     }
 
     /**

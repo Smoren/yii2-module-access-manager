@@ -52,6 +52,7 @@ class WorkerGroupController extends CommonController
     protected function userFilter(ActiveQuery $query, ?Model $form): ActiveQuery
     {
         return $query
+            ->byWorker($form->worker_id)
             ->byAlias($form->alias, true)
             ->byTitle($form->title, true);
     }
