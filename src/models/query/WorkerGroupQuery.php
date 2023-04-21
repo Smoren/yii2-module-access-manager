@@ -47,8 +47,8 @@ class WorkerGroupQuery extends \Smoren\Yii2\ActiveRecordExplicit\models\ActiveQu
 
         $workerGroupIds = WorkerGroup::find()
             ->alias('wg')
-            ->innerJoin(['wwg' => WorkerWorkerGroup::tableName()], 'wwg.worker_id = wg.id')
-            ->andWhere(['wwg.worker_group_id' => $workerId])
+            ->innerJoin(['wwg' => WorkerWorkerGroup::tableName()], 'wwg.worker_group_id = wg.id')
+            ->andWhere(['wwg.worker_id' => $workerId])
             ->select('wg.id')
             ->column();
 
