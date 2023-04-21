@@ -41,7 +41,7 @@ class ApiQuery extends ActiveQuery
             ->innerJoin(['aag' => ApiApiGroup::tableName()], 'aag.api_id = a.id')
             ->innerJoin(['ag' => ApiGroup::tableName()], 'ag.id = aag.api_group_id')
             ->andWhere(['ag.id' => $apiGroupId])
-            ->select('id')
+            ->select('a.id')
             ->column();
 
         return $this->andWhereExtended([$this->aliasColumn('id') => array_unique($apiIds)]);
