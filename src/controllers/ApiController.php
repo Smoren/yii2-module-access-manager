@@ -52,7 +52,7 @@ class ApiController extends CommonController
     protected function userFilter(ActiveQuery $query, ?Model $form): ActiveQuery
     {
         return $query
-            ->byApiGroup($form->api_group_id, true)
+            ->byApiGroup($form->api_group_id)
             ->byMethod($form->method, true)
             ->byPath($form->path, true)
             ->byTitle($form->title, true);

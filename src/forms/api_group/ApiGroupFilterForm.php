@@ -47,6 +47,15 @@ class ApiGroupFilterForm extends Model
      * )
      */
     public $is_system;
+    /**
+     * @OA\Property(
+     *     property="worker_group_id",
+     *     type="string",
+     *     example="worker_group_id",
+     *     description="Worker group ID"
+     * )
+     */
+    public $worker_group_id;
 
     /**
      * @inheritdoc
@@ -54,7 +63,7 @@ class ApiGroupFilterForm extends Model
     public function rules()
     {
         return [
-            [['alias', 'title'], 'string'],
+            [['alias', 'title', 'worker_group_id'], 'string'],
             [['in_menu', 'is_system'], 'boolean'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];

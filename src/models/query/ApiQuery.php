@@ -3,6 +3,8 @@
 namespace Smoren\Yii2\AccessManager\models\query;
 
 use Smoren\Yii2\AccessManager\models\Api;
+use Smoren\Yii2\AccessManager\models\ApiApiGroup;
+use Smoren\Yii2\AccessManager\models\ApiGroup;
 use Smoren\Yii2\ActiveRecordExplicit\exceptions\DbException;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use yii\db\Connection;
@@ -26,12 +28,23 @@ class ApiQuery extends ActiveQuery
 
     /**
      * @param $apiGroupId
-     * @param bool $filter
      * @return ActiveQuery|ApiQuery
      */
-    public function byApiGroup($apiGroupId, bool $filter = false)
+    public function byApiGroup($apiGroupId)
     {
-        return $this->andWhereExtended([$this->aliasColumn('api_group_id') => $apiGroupId], $filter);
+        if (empty($apiGroupId)) {
+            return $this;
+        }
+
+        $apiIds = Api::find()
+            ->alias('a')
+            ->innerJoin(['aag' => ApiApiGroup::tableName()], 'aag.api_id = a.id')
+            ->innerJoin(['ag' => ApiGroup::tableName()], 'ag.id = aag.api_group_id')
+            ->andWhere(['ag.id' => $apiGroupId])
+            ->select('id')
+            ->column();
+
+        return $this->andWhereExtended([$this->aliasColumn('id') => array_unique($apiIds)]);
     }
 
     /**

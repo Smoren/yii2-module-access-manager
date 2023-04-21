@@ -3,6 +3,8 @@
 namespace Smoren\Yii2\AccessManager\models\query;
 
 use Smoren\Yii2\AccessManager\models\ApiGroup;
+use Smoren\Yii2\AccessManager\models\Permission;
+use Smoren\Yii2\AccessManager\models\WorkerGroup;
 use Smoren\Yii2\ActiveRecordExplicit\exceptions\DbException;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use yii\db\Connection;
@@ -52,6 +54,27 @@ class ApiGroupQuery extends \Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery
     public function byIsSystem($inMenuFlag, bool $filter = false)
     {
         return $this->andWhereExtended([$this->aliasColumn('is_system') => $inMenuFlag], $filter);
+    }
+
+    /**
+     * @param $workerGroupId
+     * @return ActiveQuery|ApiGroupQuery
+     */
+    public function byWorkerGroup($workerGroupId)
+    {
+        if (empty($workerGroupId)) {
+            return $this;
+        }
+
+        $apiGroupIds = ApiGroup::find()
+            ->alias('ag')
+            ->innerJoin(['p' => Permission::tableName()], 'p.api_group_id = ag.id')
+            ->innerJoin(['wg' => WorkerGroup::tableName()], 'wg.id = p.worker_group_id')
+            ->andWhere(['wg.id' => $workerGroupId])
+            ->select('ag.id')
+            ->column();
+
+        return $this->andWhereExtended([$this->aliasColumn('id') => array_unique($apiGroupIds)]);
     }
 
     /**

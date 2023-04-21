@@ -6,7 +6,9 @@ use Smoren\Yii2\AccessManager\forms\api_group\ApiGroupCreateForm;
 use Smoren\Yii2\AccessManager\forms\api_group\ApiGroupFilterForm;
 use Smoren\Yii2\AccessManager\forms\api_group\ApiGroupUpdateForm;
 use Smoren\Yii2\AccessManager\models\ApiGroup;
+use Smoren\Yii2\AccessManager\models\Permission;
 use Smoren\Yii2\AccessManager\models\query\ApiGroupQuery;
+use Smoren\Yii2\AccessManager\models\WorkerGroup;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
 use Smoren\Yii2\Auth\controllers\RestControllerTrait;
@@ -52,6 +54,7 @@ class ApiGroupController extends CommonController
     protected function userFilter(ActiveQuery $query, ?Model $form): ActiveQuery
     {
         return $query
+            ->byWorkerGroup($form->worker_group_id)
             ->byAlias($form->alias, true)
             ->byTitle($form->title, true)
             ->byInMenu($form->in_menu, true)
