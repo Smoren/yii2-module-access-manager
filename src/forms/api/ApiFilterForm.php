@@ -54,7 +54,7 @@ class ApiFilterForm extends Model
     public function rules()
     {
         return [
-            [['method', 'path', 'title'], 'string'],
+            [['method', 'path', 'title', 'api_group_id'], 'string'],
             [['path', 'title'], 'string', 'max' => 255],
             [['method'], 'string', 'max' => 10],
         ];
