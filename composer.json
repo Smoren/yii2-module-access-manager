@@ -19,7 +19,8 @@
     "smoren/yii2-helpers": "^0.1.0",
     "smoren/yii2-active-record-explicit": "^1.0.4|^2.0.0",
     "smoren/yii2-auth-components": "^0.1.5",
-    "thamtech/yii2-uuid": "^1.2"
+    "thamtech/yii2-uuid": "^1.2",
+    "smoren/helpers": "^0.1.12"
   },
   "require-dev": {
     "codeception/codeception": "^4.0",
