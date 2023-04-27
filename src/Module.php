@@ -2,11 +2,13 @@
 
 namespace Smoren\Yii2\AccessManager;
 
+use Smoren\Helpers\EnvHelper;
 use Smoren\Yii2\AccessManager\controllers\ApiApiGroupController;
 use Smoren\Yii2\AccessManager\controllers\ApiController;
 use Smoren\Yii2\AccessManager\controllers\ApiGroupController;
 use Smoren\Yii2\AccessManager\controllers\PermissionController;
 use Smoren\Yii2\AccessManager\controllers\RuleController;
+use Smoren\Yii2\AccessManager\controllers\WorkerController;
 use Smoren\Yii2\AccessManager\controllers\WorkerGroupController;
 use Smoren\Yii2\AccessManager\controllers\WorkerGroupRuleController;
 use Smoren\Yii2\AccessManager\controllers\WorkerWorkerGroupController;
@@ -60,7 +62,8 @@ class Module extends \yii\base\Module implements BootstrapInterface
             WorkerWorkerGroupController::getRules("/{$this->id}/worker-worker-group", "{$this->id}/worker-worker-group"),
             PermissionController::getRules("/{$this->id}/permission", "{$this->id}/permission"),
             RuleController::getRules("/{$this->id}/rule", "{$this->id}/rule", $uuidRegexp),
-            WorkerGroupRuleController::getRules("/{$this->id}/worker-group-rule", "{$this->id}/worker-group-rule")
+            WorkerGroupRuleController::getRules("/{$this->id}/worker-group-rule", "{$this->id}/worker-group-rule"),
+            WorkerController::getRules("/{$this->id}/worker", "{$this->id}/worker", $uuidRegexp)
         ));
     }
 
