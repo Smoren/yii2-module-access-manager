@@ -32,6 +32,13 @@ Include into Yii2 config:
 ...
 ```
 
+Include into Yii2 env file:
+```
+...
+ACCESS_WORKER_TABLE='the existing table you want to be access worker table'
+...
+```
+
 Then run migrations:
 ```
 php yii migrate
