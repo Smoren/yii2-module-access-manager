@@ -95,6 +95,7 @@ class m211208_133842_insert_default_values extends Migration
             [
                 'alias' => 'admin',
                 'title' => 'Administrators',
+                'is_system' => true,
             ]
         );
 
