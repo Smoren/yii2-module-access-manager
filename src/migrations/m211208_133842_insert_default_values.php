@@ -65,6 +65,22 @@ class m211208_133842_insert_default_values extends Migration
         $this->insert(
             "{$tablePrefix}_api_group",
             [
+                'alias' => 'open',
+                'title' => 'Open API',
+                'in_menu' => false,
+                'is_system' => true,
+            ]
+        );
+
+        $openApiGroupId = (new Query())
+            ->select('id')
+            ->from("{$tablePrefix}_api_group")
+            ->andWhere(['alias' => 'open'])
+            ->column()[0];
+
+        $this->insert(
+            "{$tablePrefix}_api_group",
+            [
                 'alias' => 'access_control',
                 'title' => 'Access control',
                 'in_menu' => false,
@@ -72,7 +88,7 @@ class m211208_133842_insert_default_values extends Migration
             ]
         );
 
-        $apiGroupId = (new Query())
+        $accessApiGroupId = (new Query())
             ->select('id')
             ->from("{$tablePrefix}_api_group")
             ->andWhere(['alias' => 'access_control'])
@@ -81,7 +97,7 @@ class m211208_133842_insert_default_values extends Migration
         $apiApiGroupsRows = [];
 
         foreach ($apiIds as $apiId) {
-            $apiApiGroupsRows[] = [$apiId, $apiGroupId];
+            $apiApiGroupsRows[] = [$apiId, $accessApiGroupId];
         }
 
         $this->batchInsert(
@@ -93,23 +109,46 @@ class m211208_133842_insert_default_values extends Migration
         $this->insert(
             "{$tablePrefix}_worker_group",
             [
-                'alias' => 'admin',
+                'alias' => 'admins',
                 'title' => 'Administrators',
                 'is_system' => true,
             ]
         );
 
-        $workerGroupId = (new Query())
+        $adminWorkerGroupId = (new Query())
             ->select('id')
             ->from("{$tablePrefix}_worker_group")
-            ->andWhere(['alias' => 'admin'])
+            ->andWhere(['alias' => 'admins'])
             ->column()[0];
 
         $this->insert(
             "{$tablePrefix}_permission",
             [
-                'api_group_id' => $apiGroupId,
-                'worker_group_id' => $workerGroupId,
+                'api_group_id' => $accessApiGroupId,
+                'worker_group_id' => $adminWorkerGroupId,
+            ]
+        );
+
+        $this->insert(
+            "{$tablePrefix}_worker_group",
+            [
+                'alias' => 'users',
+                'title' => 'Users',
+                'is_system' => true,
+            ]
+        );
+
+        $userWorkerGroupId = (new Query())
+            ->select('id')
+            ->from("{$tablePrefix}_worker_group")
+            ->andWhere(['alias' => 'users'])
+            ->column()[0];
+
+        $this->insert(
+            "{$tablePrefix}_permission",
+            [
+                'api_group_id' => $openApiGroupId,
+                'worker_group_id' => $userWorkerGroupId,
             ]
         );
 
@@ -130,7 +169,7 @@ class m211208_133842_insert_default_values extends Migration
         $this->insert(
             "{$tablePrefix}_worker_group_rule",
             [
-                'worker_group_id' => $workerGroupId,
+                'worker_group_id' => $adminWorkerGroupId,
                 'rule_id' => $ruleId,
             ]
         );
