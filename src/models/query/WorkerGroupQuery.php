@@ -3,6 +3,7 @@
 namespace Smoren\Yii2\AccessManager\models\query;
 
 use Smoren\Yii2\AccessManager\models\WorkerGroup;
+use Smoren\Yii2\AccessManager\models\WorkerGroupRule;
 use Smoren\Yii2\AccessManager\models\WorkerWorkerGroup;
 use Smoren\Yii2\ActiveRecordExplicit\exceptions\DbException;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
@@ -49,6 +50,26 @@ class WorkerGroupQuery extends \Smoren\Yii2\ActiveRecordExplicit\models\ActiveQu
             ->alias('wg')
             ->innerJoin(['wwg' => WorkerWorkerGroup::tableName()], 'wwg.worker_group_id = wg.id')
             ->andWhere(['wwg.worker_id' => $workerId])
+            ->select('wg.id')
+            ->column();
+
+        return $this->andWhereExtended([$this->aliasColumn('id') => $workerGroupIds]);
+    }
+
+    /**
+     * @param $ruleId
+     * @return ActiveQuery|WorkerGroupQuery
+     */
+    public function byRule($ruleId)
+    {
+        if (empty($ruleId)) {
+            return $this;
+        }
+
+        $workerGroupIds = WorkerGroup::find()
+            ->alias('wg')
+            ->innerJoin(['wgr' => WorkerGroupRule::tableName()], 'wgr.worker_group_id = wg.id')
+            ->andWhere(['wgr.rule_id' => $ruleId])
             ->select('wg.id')
             ->column();
 

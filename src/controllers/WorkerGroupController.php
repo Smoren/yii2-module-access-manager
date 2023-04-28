@@ -53,6 +53,7 @@ class WorkerGroupController extends CommonController
     {
         return $query
             ->byWorker($form->worker_id)
+            ->byRule($form->rule_id)
             ->byAlias($form->alias, true)
             ->byTitle($form->title, true);
     }

@@ -38,6 +38,15 @@ class WorkerGroupFilterForm extends Model
      * )
      */
     public $worker_id;
+    /**
+     * @OA\Property(
+     *     property="rule_id",
+     *     type="string",
+     *     example="rule_id",
+     *     description="Rule ID"
+     * )
+     */
+    public $rule_id;
 
     /**
      * @inheritdoc
@@ -45,7 +54,7 @@ class WorkerGroupFilterForm extends Model
     public function rules(): array
     {
         return [
-            [['alias', 'title', 'worker_id'], 'string'],
+            [['alias', 'title', 'worker_id', 'rule_id'], 'string'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];
     }
