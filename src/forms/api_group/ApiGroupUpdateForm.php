@@ -24,12 +24,6 @@ namespace Smoren\Yii2\AccessManager\forms\api_group;
  *     example=false,
  *     description="Include to menu flag"
  * )
- * @OA\Property(
- *     property="is_system",
- *     type="bool",
- *     example=false,
- *     description="Is system API group flag"
- * )
  */
 class ApiGroupUpdateForm extends ApiGroupCreateForm
 {
@@ -40,8 +34,8 @@ class ApiGroupUpdateForm extends ApiGroupCreateForm
     {
         return [
             [['alias', 'title'], 'string'],
-            [['in_menu', 'is_system'], 'boolean'],
-            [['in_menu', 'is_system'], 'default', 'value' => false],
+            [['in_menu'], 'boolean'],
+            [['in_menu'], 'default', 'value' => false],
             [['extra'], 'validateExtra'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];

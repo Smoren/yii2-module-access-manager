@@ -40,6 +40,15 @@ class ApiGroupFilterForm extends Model
     public $in_menu;
     /**
      * @OA\Property(
+     *     property="is_system",
+     *     type="bool",
+     *     example=false,
+     *     description="Is system API group flag"
+     * )
+     */
+    public $is_system;
+    /**
+     * @OA\Property(
      *     property="worker_group_id",
      *     type="string",
      *     example="worker_group_id",
@@ -55,7 +64,7 @@ class ApiGroupFilterForm extends Model
     {
         return [
             [['alias', 'title', 'worker_group_id'], 'string'],
-            [['in_menu'], 'boolean'],
+            [['in_menu', 'is_system'], 'boolean'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];
     }
