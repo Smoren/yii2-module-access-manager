@@ -17,6 +17,7 @@ use yii\db\ActiveQuery;
  * @property string $id
  * @property string $alias
  * @property string $title
+ * @property bool $is_system
  * @property string|null $extra
  * @property int $created_at
  * @property int|null $updated_at
@@ -42,6 +43,7 @@ class Rule extends ActiveRecord
         return [
             ['id', UuidValidator::class],
             [['alias', 'title'], 'required'],
+            [['is_system'], 'boolean'],
             [['extra'], 'safe'],
             [['created_at', 'updated_at'], 'default', 'value' => null],
             [['created_at', 'updated_at'], 'integer'],
@@ -60,6 +62,7 @@ class Rule extends ActiveRecord
             'id' => 'ID',
             'alias' => 'Alias',
             'title' => 'Title',
+            'is_system' => 'Is System',
             'extra' => 'Extra',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

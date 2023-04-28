@@ -21,6 +21,7 @@ class m211206_150647_create_worker_group_table extends Migration
             'id' => $this->uuidPrimaryKey(),
             'alias' => $this->string(255)->notNull(),
             'title' => $this->string(255)->notNull(),
+            'is_system' => $this->boolean()->notNull()->defaultValue(false),
             'extra' => $this->json(),
             'created_at' => $this->createdAt(),
             'updated_at' => $this->updatedAt(),
@@ -28,6 +29,7 @@ class m211206_150647_create_worker_group_table extends Migration
         $this->createIndex("idx-{$tablePrefix}_worker_group-created_at", "{$tablePrefix}_worker_group", 'created_at');
         $this->createIndex("idx-{$tablePrefix}_worker_group-alias", "{$tablePrefix}_worker_group", 'alias', true);
         $this->createIndex("idx-{$tablePrefix}_worker_group-title", "{$tablePrefix}_worker_group", 'title');
+        $this->createIndex("idx-{$tablePrefix}_worker_group-is_system", "{$tablePrefix}_worker_group", 'is_system');
     }
 
     /**

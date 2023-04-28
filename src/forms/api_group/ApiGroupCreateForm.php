@@ -40,15 +40,6 @@ class ApiGroupCreateForm extends Model
     public $in_menu;
     /**
      * @OA\Property(
-     *     property="is_system",
-     *     type="bool",
-     *     example=false,
-     *     description="Is system API group flag"
-     * )
-     */
-    public $is_system;
-    /**
-     * @OA\Property(
      *     property="extra",
      *     type="object|null",
      *     example=null,
@@ -65,8 +56,8 @@ class ApiGroupCreateForm extends Model
         return [
             [['alias', 'title'], 'required'],
             [['alias', 'title'], 'string'],
-            [['in_menu', 'is_system'], 'boolean'],
-            [['in_menu', 'is_system'], 'default', 'value' => false],
+            [['in_menu'], 'boolean'],
+            [['in_menu'], 'default', 'value' => false],
             [['extra'], 'validateExtra'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];
