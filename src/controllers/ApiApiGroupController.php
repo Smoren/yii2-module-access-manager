@@ -14,7 +14,6 @@ class ApiApiGroupController extends CommonController
     /**
      * @param string $apiPath
      * @param string $controllerPath
-     * @param string $uuidRegexp
      * @return array
      */
     public static function getRules(string $apiPath, string $controllerPath): array
