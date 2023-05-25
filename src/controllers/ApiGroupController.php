@@ -9,13 +9,10 @@ use Smoren\Yii2\AccessManager\models\ApiGroup;
 use Smoren\Yii2\AccessManager\models\query\ApiGroupQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
-use Smoren\Yii2\Auth\controllers\RestControllerTrait;
 use Yii;
 
-class ApiGroupController extends CommonController
+class ApiGroupController extends CommonRestController
 {
-    use RestControllerTrait;
-
     /**
      * @inheritDoc
      * @return ApiGroupCreateForm

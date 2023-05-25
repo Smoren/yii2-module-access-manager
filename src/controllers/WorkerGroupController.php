@@ -9,13 +9,10 @@ use Smoren\Yii2\AccessManager\models\query\WorkerGroupQuery;
 use Smoren\Yii2\AccessManager\models\WorkerGroup;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
-use Smoren\Yii2\Auth\controllers\RestControllerTrait;
 use Yii;
 
-class WorkerGroupController extends CommonController
+class WorkerGroupController extends CommonRestController
 {
-    use RestControllerTrait;
-
     /**
      * @inheritDoc
      * @return WorkerGroupCreateForm

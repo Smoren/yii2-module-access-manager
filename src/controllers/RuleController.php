@@ -9,13 +9,10 @@ use Smoren\Yii2\AccessManager\models\query\RuleQuery;
 use Smoren\Yii2\AccessManager\models\Rule;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
-use Smoren\Yii2\Auth\controllers\RestControllerTrait;
 use Yii;
 
-class RuleController extends CommonController
+class RuleController extends CommonRestController
 {
-    use RestControllerTrait;
-
     /**
      * @inheritDoc
      * @return RuleCreateForm

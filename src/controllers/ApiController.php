@@ -9,13 +9,10 @@ use Smoren\Yii2\AccessManager\models\Api;
 use Smoren\Yii2\AccessManager\models\query\ApiQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery;
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
-use Smoren\Yii2\Auth\controllers\RestControllerTrait;
 use Yii;
 
-class ApiController extends CommonController
+class ApiController extends CommonRestController
 {
-    use RestControllerTrait;
-
     /**
      * @inheritDoc
      * @return ApiCreateForm
