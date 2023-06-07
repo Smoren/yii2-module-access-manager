@@ -40,6 +40,15 @@ class ApiGroupCreateForm extends Model
     public $in_menu;
     /**
      * @OA\Property(
+     *     property="in_menu",
+     *     type="bool",
+     *     example=false,
+     *     description="Include to menu flag"
+     * )
+     */
+    public $is_secured;
+    /**
+     * @OA\Property(
      *     property="extra",
      *     type="object|null",
      *     example=null,
@@ -56,8 +65,9 @@ class ApiGroupCreateForm extends Model
         return [
             [['alias', 'title'], 'required'],
             [['alias', 'title'], 'string'],
-            [['in_menu'], 'boolean'],
+            [['in_menu', 'is_secured'], 'boolean'],
             [['in_menu'], 'default', 'value' => false],
+            [['is_secured'], 'default', 'value' => true],
             [['extra'], 'validateExtra'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];

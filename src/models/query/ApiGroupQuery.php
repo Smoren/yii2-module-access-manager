@@ -57,6 +57,16 @@ class ApiGroupQuery extends \Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery
     }
 
     /**
+     * @param $isSecureFlag
+     * @param bool $filter
+     * @return ActiveQuery|ApiGroupQuery
+     */
+    public function byIsSecure($isSecureFlag, bool $filter = false)
+    {
+        return $this->andWhereExtended([$this->aliasColumn('is_secure') => $isSecureFlag], $filter);
+    }
+
+    /**
      * @param $workerGroupId
      * @return ActiveQuery|ApiGroupQuery
      */

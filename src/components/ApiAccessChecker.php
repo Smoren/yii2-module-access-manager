@@ -60,6 +60,20 @@ class ApiAccessChecker
             ->from(['a' => Api::tableName()])
             ->innerJoin(['aag' => ApiApiGroup::tableName()], 'aag.api_id = a.id')
             ->innerJoin(['ag' => ApiGroup::tableName()], 'ag.id = aag.api_group_id')
+            ->andWhere(['a.method' => $this->method])
+            ->andWhere(['a.path' => $this->path])
+            ->andWhere(['ag.is_secured' => false])
+            ->count();
+
+        if($grantCount) {
+            return $this;
+        }
+
+        $grantCount = (new Query())
+            ->select('p.api_group_id')
+            ->from(['a' => Api::tableName()])
+            ->innerJoin(['aag' => ApiApiGroup::tableName()], 'aag.api_id = a.id')
+            ->innerJoin(['ag' => ApiGroup::tableName()], 'ag.id = aag.api_group_id')
             ->innerJoin(['p' => Permission::tableName()], 'p.api_group_id = ag.id')
             ->innerJoin(['ug' => WorkerGroup::tableName()], 'ug.id = p.worker_group_id')
             ->innerJoin(['uug' => WorkerWorkerGroup::tableName()], 'uug.worker_group_id = ug.id')
@@ -68,11 +82,11 @@ class ApiAccessChecker
             ->andWhere(['a.path' => $this->path])
             ->count('p.api_group_id', $this->dbConn);
 
-        if(!$grantCount) {
-            throw new ApiException('access denied', StatusCode::FORBIDDEN);
+        if($grantCount) {
+            return $this;
         }
 
-        return $this;
+        throw new ApiException('access denied', StatusCode::FORBIDDEN);
     }
 
     public function checkRule(string $ruleAlias): self

@@ -21,6 +21,7 @@ use yii\db\ActiveQuery;
  * @property string $title
  * @property bool $in_menu
  * @property bool $is_system
+ * @property bool $is_secured
  * @property string|null $extra
  * @property int $created_at
  * @property int|null $updated_at
@@ -48,7 +49,7 @@ class ApiGroup extends ActiveRecord
         return [
             ['id', UuidValidator::class],
             [['alias', 'title'], 'required'],
-            [['in_menu', 'is_system'], 'boolean'],
+            [['in_menu', 'is_system', 'is_secured'], 'boolean'],
             [['extra'], 'safe'],
             [['created_at', 'updated_at'], 'default', 'value' => null],
             [['created_at', 'updated_at'], 'integer'],
@@ -69,6 +70,7 @@ class ApiGroup extends ActiveRecord
             'title' => 'Title',
             'in_menu' => 'In Menu',
             'is_system' => 'Is System',
+            'is_secured' => 'Is Secured',
             'extra' => 'Extra',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

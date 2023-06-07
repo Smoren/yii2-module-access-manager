@@ -34,8 +34,9 @@ class ApiGroupUpdateForm extends ApiGroupCreateForm
     {
         return [
             [['alias', 'title'], 'string'],
-            [['in_menu'], 'boolean'],
+            [['in_menu', 'is_secured'], 'boolean'],
             [['in_menu'], 'default', 'value' => false],
+            [['is_secured'], 'default', 'value' => true],
             [['extra'], 'validateExtra'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];
