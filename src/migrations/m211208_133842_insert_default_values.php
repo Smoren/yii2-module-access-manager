@@ -69,7 +69,7 @@ class m211208_133842_insert_default_values extends Migration
                 'title' => 'Open API',
                 'in_menu' => false,
                 'is_system' => true,
-                'is_secured' => true,
+                'is_secured' => false,
             ]
         );
 
