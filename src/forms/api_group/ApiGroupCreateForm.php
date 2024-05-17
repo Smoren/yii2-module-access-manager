@@ -49,6 +49,15 @@ class ApiGroupCreateForm extends Model
     public $is_secured;
     /**
      * @OA\Property(
+     *     property="sort",
+     *     type="integer",
+     *     example="0",
+     *     description="Sort index"
+     * )
+     */
+    public $sort;
+    /**
+     * @OA\Property(
      *     property="extra",
      *     type="object|null",
      *     example=null,
@@ -65,6 +74,8 @@ class ApiGroupCreateForm extends Model
         return [
             [['alias', 'title'], 'required'],
             [['alias', 'title'], 'string'],
+            [['sort'], 'integer'],
+            [['sort'], 'integer', 'default' => 0],
             [['in_menu', 'is_secured'], 'boolean'],
             [['in_menu'], 'default', 'value' => false],
             [['is_secured'], 'default', 'value' => true],

@@ -77,6 +77,15 @@ class WorkerGroupQuery extends \Smoren\Yii2\ActiveRecordExplicit\models\ActiveQu
     }
 
     /**
+     * @param int $direction
+     * @return self
+     */
+    public function sort(int $direction = SORT_ASC): self
+    {
+        return $this->orderBy(['sort' => $direction]);
+    }
+
+    /**
      * @param Connection|null $db
      * @return array|WorkerGroup
      * @throws DbException

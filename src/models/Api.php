@@ -18,6 +18,7 @@ use yii\db\ActiveQuery;
  * @property string $method
  * @property string $path
  * @property string $title
+ * @property int $sort
  * @property string|null $extra
  * @property int $created_at
  * @property int|null $updated_at
@@ -44,8 +45,9 @@ class Api extends ActiveRecord
             ['id', UuidValidator::class],
             [['method', 'path', 'title'], 'required'],
             [['extra'], 'safe'],
+            [['sort'], 'default', 'value' => 0],
             [['created_at', 'updated_at'], 'default', 'value' => null],
-            [['created_at', 'updated_at'], 'integer'],
+            [['sort', 'created_at', 'updated_at'], 'integer'],
             [['method'], 'string', 'max' => 10],
             [['path', 'title'], 'string', 'max' => 255],
             [['method', 'path'], 'unique', 'targetAttribute' => ['method', 'path']],
@@ -63,6 +65,7 @@ class Api extends ActiveRecord
             'method' => 'Method',
             'path' => 'Path',
             'title' => 'Title',
+            'sort' => 'Sort',
             'extra' => 'Extra',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

@@ -19,6 +19,12 @@ namespace Smoren\Yii2\AccessManager\forms\worker_group;
  *     description="Worker group name"
  * )
  * @OA\Property(
+ *     property="sort",
+ *     type="integer",
+ *     example="0",
+ *     description="Sort index"
+ * )
+ * @OA\Property(
  *     property="extra",
  *     type="object|null",
  *     example=null,
@@ -34,6 +40,8 @@ class WorkerGroupUpdateForm extends WorkerGroupCreateForm
     {
         return [
             [['alias', 'title'], 'string'],
+            [['sort'], 'integer'],
+            [['sort'], 'integer', 'default' => 0],
             [['extra'], 'validateExtra'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];

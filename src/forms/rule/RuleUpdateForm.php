@@ -24,6 +24,12 @@ namespace Smoren\Yii2\AccessManager\forms\rule;
  *     example=null,
  *     description="Extra data"
  * )
+ * @OA\Property(
+ *     property="sort",
+ *     type="integer",
+ *     example="0",
+ *     description="Sort index"
+ * )
  */
 class RuleUpdateForm extends RuleCreateForm
 {
@@ -34,6 +40,8 @@ class RuleUpdateForm extends RuleCreateForm
     {
         return [
             [['alias', 'title'], 'string'],
+            [['sort'], 'integer'],
+            [['sort'], 'integer', 'default' => 0],
             [['extra'], 'validateExtra'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];

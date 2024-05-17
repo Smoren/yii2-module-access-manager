@@ -19,6 +19,7 @@ use yii\db\ActiveQuery;
  * @property string $alias
  * @property string $title
  * @property bool $is_system
+ * @property int $sort
  * @property string|null $extra
  * @property int $created_at
  * @property int|null $updated_at
@@ -47,8 +48,9 @@ class WorkerGroup extends ActiveRecord
             [['alias', 'title'], 'required'],
             [['is_system'], 'boolean'],
             [['extra'], 'safe'],
+            [['sort'], 'default', 'value' => 0],
             [['created_at', 'updated_at'], 'default', 'value' => null],
-            [['created_at', 'updated_at'], 'integer'],
+            [['sort', 'created_at', 'updated_at'], 'integer'],
             [['alias', 'title'], 'string', 'max' => 255],
             [['alias'], 'unique'],
             [['id'], 'unique'],
@@ -65,6 +67,7 @@ class WorkerGroup extends ActiveRecord
             'alias' => 'Alias',
             'title' => 'Title',
             'is_system' => 'Is System',
+            'sort' => 'Sort',
             'extra' => 'Extra',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

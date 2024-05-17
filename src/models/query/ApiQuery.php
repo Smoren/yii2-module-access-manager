@@ -68,6 +68,15 @@ class ApiQuery extends ActiveQuery
     }
 
     /**
+     * @param int $direction
+     * @return self
+     */
+    public function sort(int $direction = SORT_ASC): self
+    {
+        return $this->orderBy(['sort' => $direction]);
+    }
+
+    /**
      * @param Connection|null $db
      * @return array|Api
      * @throws DbException
