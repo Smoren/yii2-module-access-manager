@@ -25,6 +25,7 @@ class m211202_155654_create_api_group_table extends Migration
             'in_menu' => $this->boolean()->notNull()->defaultValue(false),
             'is_system' => $this->boolean()->notNull()->defaultValue(false),
             'is_secured' => $this->boolean()->notNull()->defaultValue(true),
+            'sort' => $this->integer()->notNull()->defaultValue(0),
             'extra' => $this->json(),
             'created_at' => $this->createdAt(),
             'updated_at' => $this->updatedAt(),
@@ -34,6 +35,7 @@ class m211202_155654_create_api_group_table extends Migration
         $this->createIndex("idx-{$tablePrefix}_api_group-in_menu", "{$tablePrefix}_api_group", 'in_menu');
         $this->createIndex("idx-{$tablePrefix}_api_group-is_system", "{$tablePrefix}_api_group", 'is_system');
         $this->createIndex("idx-{$tablePrefix}_api_group-is_secured", "{$tablePrefix}_api_group", 'is_system');
+        $this->createIndex("idx-{$tablePrefix}_api_group-sort", "{$tablePrefix}_api_group", 'sort');
     }
 
     /**

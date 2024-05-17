@@ -23,6 +23,7 @@ class m211202_154704_create_api_table extends Migration
             'method' => $this->string(10)->notNull(),
             'path' => $this->string(255)->notNull(),
             'title' => $this->string(255)->notNull(),
+            'sort' => $this->integer()->notNull()->defaultValue(0),
             'extra' => $this->json(),
             'created_at' => $this->createdAt(),
             'updated_at' => $this->updatedAt(),
@@ -32,6 +33,7 @@ class m211202_154704_create_api_table extends Migration
         $this->createIndex("idx-{$tablePrefix}-path", "{$tablePrefix}_api", 'path');
         $this->createIndex("idx-{$tablePrefix}-method-path", "{$tablePrefix}_api", ['method', 'path'], true);
         $this->createIndex("idx-{$tablePrefix}-title", "{$tablePrefix}_api", 'title');
+        $this->createIndex("idx-{$tablePrefix}-sort", "{$tablePrefix}_api", 'sort');
     }
 
     /**
