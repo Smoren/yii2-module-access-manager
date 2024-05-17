@@ -47,7 +47,7 @@ class ApiUpdateForm extends ApiCreateForm
         return [
             [['method', 'path', 'title'], 'string'],
             [['sort'], 'integer'],
-            [['sort'], 'integer', 'default' => 0],
+            [['sort'], 'default', 'value' => 0],
             [['extra'], 'validateExtra'],
             [['path', 'title'], 'string', 'max' => 255],
             [['method'], 'string', 'max' => 10],

@@ -57,7 +57,7 @@ class WorkerGroupCreateForm extends Model
             [['alias', 'title'], 'required'],
             [['alias', 'title'], 'string'],
             [['sort'], 'integer'],
-            [['sort'], 'integer', 'default' => 0],
+            [['sort'], 'default', 'value' => 0],
             [['extra'], 'validateExtra'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];

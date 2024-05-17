@@ -66,7 +66,7 @@ class ApiCreateForm extends Model
             [['method', 'path', 'title'], 'required'],
             [['method', 'path', 'title'], 'string'],
             [['sort'], 'integer'],
-            [['sort'], 'integer', 'default' => 0],
+            [['sort'], 'default', 'value' => 0],
             [['extra'], 'validateExtra'],
             [['path', 'title'], 'string', 'max' => 255],
             [['method'], 'string', 'max' => 10],

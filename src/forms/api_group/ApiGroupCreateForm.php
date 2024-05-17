@@ -75,7 +75,7 @@ class ApiGroupCreateForm extends Model
             [['alias', 'title'], 'required'],
             [['alias', 'title'], 'string'],
             [['sort'], 'integer'],
-            [['sort'], 'integer', 'default' => 0],
+            [['sort'], 'default', 'value' => 0],
             [['in_menu', 'is_secured'], 'boolean'],
             [['in_menu'], 'default', 'value' => false],
             [['is_secured'], 'default', 'value' => true],
