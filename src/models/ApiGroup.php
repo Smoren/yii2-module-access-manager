@@ -22,6 +22,7 @@ use yii\db\ActiveQuery;
  * @property bool $in_menu
  * @property bool $is_system
  * @property bool $is_secured
+ * @property int $sort
  * @property string|null $extra
  * @property int $created_at
  * @property int|null $updated_at
@@ -51,8 +52,9 @@ class ApiGroup extends ActiveRecord
             [['alias', 'title'], 'required'],
             [['in_menu', 'is_system', 'is_secured'], 'boolean'],
             [['extra'], 'safe'],
+            [['sort'], 'default', 'value' => 0],
             [['created_at', 'updated_at'], 'default', 'value' => null],
-            [['created_at', 'updated_at'], 'integer'],
+            [['sort', 'created_at', 'updated_at'], 'integer'],
             [['alias', 'title'], 'string', 'max' => 255],
             [['alias'], 'unique'],
             [['id'], 'unique'],
@@ -71,6 +73,7 @@ class ApiGroup extends ActiveRecord
             'in_menu' => 'In Menu',
             'is_system' => 'Is System',
             'is_secured' => 'Is Secured',
+            'sort' => 'Sort',
             'extra' => 'Extra',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

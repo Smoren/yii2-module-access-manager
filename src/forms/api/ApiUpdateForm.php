@@ -25,6 +25,12 @@ namespace Smoren\Yii2\AccessManager\forms\api;
  *     description="API name"
  * )
  * @OA\Property(
+ *     property="sort",
+ *     type="integer",
+ *     example="0",
+ *     description="Sort index"
+ * )
+ * @OA\Property(
  *     property="extra",
  *     type="object|null",
  *     example=null,
@@ -40,6 +46,8 @@ class ApiUpdateForm extends ApiCreateForm
     {
         return [
             [['method', 'path', 'title'], 'string'],
+            [['sort'], 'integer'],
+            [['sort'], 'integer', 'default' => 0],
             [['extra'], 'validateExtra'],
             [['path', 'title'], 'string', 'max' => 255],
             [['method'], 'string', 'max' => 10],

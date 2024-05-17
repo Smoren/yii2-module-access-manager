@@ -31,6 +31,15 @@ class RuleCreateForm extends Model
     public $title;
     /**
      * @OA\Property(
+     *     property="sort",
+     *     type="integer",
+     *     example="0",
+     *     description="Sort index"
+     * )
+     */
+    public $sort;
+    /**
+     * @OA\Property(
      *     property="extra",
      *     type="object|null",
      *     example=null,
@@ -47,6 +56,8 @@ class RuleCreateForm extends Model
         return [
             [['alias', 'title'], 'required'],
             [['alias', 'title'], 'string'],
+            [['sort'], 'integer'],
+            [['sort'], 'integer', 'default' => 0],
             [['extra'], 'validateExtra'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];

@@ -24,6 +24,12 @@ namespace Smoren\Yii2\AccessManager\forms\api_group;
  *     example=false,
  *     description="Include to menu flag"
  * )
+ * @OA\Property(
+ *     property="sort",
+ *     type="integer",
+ *     example="0",
+ *     description="Sort index"
+ * )
  */
 class ApiGroupUpdateForm extends ApiGroupCreateForm
 {
@@ -37,6 +43,8 @@ class ApiGroupUpdateForm extends ApiGroupCreateForm
             [['in_menu', 'is_secured'], 'boolean'],
             [['in_menu'], 'default', 'value' => false],
             [['is_secured'], 'default', 'value' => true],
+            [['sort'], 'integer'],
+            [['sort'], 'integer', 'default' => 0],
             [['extra'], 'validateExtra'],
             [['alias', 'title'], 'string', 'max' => 255],
         ];

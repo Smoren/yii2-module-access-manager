@@ -58,7 +58,7 @@ class RuleController extends CommonRestController
      */
     protected function userOrder(ActiveQuery $query, ?Model $form): ActiveQuery
     {
-        return $query->orderBy(['title' => SORT_ASC]);
+        return $query->orderBy(['sort' => SORT_ASC, 'title' => SORT_ASC]);
     }
 
     /**

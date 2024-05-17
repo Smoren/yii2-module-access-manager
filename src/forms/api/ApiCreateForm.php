@@ -40,6 +40,15 @@ class ApiCreateForm extends Model
     public $title;
     /**
      * @OA\Property(
+     *     property="sort",
+     *     type="integer",
+     *     example="0",
+     *     description="Sort index"
+     * )
+     */
+    public $sort;
+    /**
+     * @OA\Property(
      *     property="extra",
      *     type="object|null",
      *     example=null,
@@ -56,6 +65,8 @@ class ApiCreateForm extends Model
         return [
             [['method', 'path', 'title'], 'required'],
             [['method', 'path', 'title'], 'string'],
+            [['sort'], 'integer'],
+            [['sort'], 'integer', 'default' => 0],
             [['extra'], 'validateExtra'],
             [['path', 'title'], 'string', 'max' => 255],
             [['method'], 'string', 'max' => 10],

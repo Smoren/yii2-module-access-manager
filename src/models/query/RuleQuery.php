@@ -35,6 +35,15 @@ class RuleQuery extends ActiveQuery
     }
 
     /**
+     * @param int $direction
+     * @return self
+     */
+    public function sort(int $direction = SORT_ASC): self
+    {
+        return $this->orderBy(['sort' => $direction]);
+    }
+
+    /**
      * @param Connection|null $db
      * @return array|Rule
      * @throws DbException
