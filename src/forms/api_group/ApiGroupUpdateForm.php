@@ -2,6 +2,8 @@
 
 namespace Smoren\Yii2\AccessManager\forms\api_group;
 
+use thamtech\uuid\validators\UuidValidator;
+
 /**
  * Model for updating api_group
  *
@@ -11,6 +13,12 @@ namespace Smoren\Yii2\AccessManager\forms\api_group;
  *     type="string",
  *     example="api_group_alias",
  *     description="API group alias"
+ * )
+ * @OA\Property(
+ *     property="alias",
+ *     type="string",
+ *     example="00000000-0000-0000-000000000000",
+ *     description="API group parent_id"
  * )
  * @OA\Property(
  *     property="title",
@@ -40,6 +48,7 @@ class ApiGroupUpdateForm extends ApiGroupCreateForm
     {
         return [
             [['alias', 'title'], 'string'],
+            [['api_group_id'], UuidValidator::class],
             [['in_menu', 'is_secured'], 'boolean'],
             [['in_menu'], 'default', 'value' => false],
             [['is_secured'], 'default', 'value' => true],

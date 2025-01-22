@@ -57,6 +57,16 @@ class ApiGroupQuery extends \Smoren\Yii2\ActiveRecordExplicit\models\ActiveQuery
     }
 
     /**
+     * @param $parentId
+     * @param bool $filter
+     * @return ActiveQuery|ApiGroupQuery
+     */
+    public function byParentId($parentId, bool $filter = false)
+    {
+        return $this->andWhereExtended([$this->aliasColumn('parent_id') => $parentId], $filter);
+    }
+
+    /**
      * @param $isSecureFlag
      * @param bool $filter
      * @return ActiveQuery|ApiGroupQuery

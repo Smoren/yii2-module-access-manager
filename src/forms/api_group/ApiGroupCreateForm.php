@@ -3,6 +3,7 @@
 namespace Smoren\Yii2\AccessManager\forms\api_group;
 
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
+use thamtech\uuid\validators\UuidValidator;
 
 /**
  * Model for creating api_group
@@ -20,6 +21,15 @@ class ApiGroupCreateForm extends Model
      * )
      */
     public $alias;
+    /**
+     * @OA\Property(
+     *     property="alias",
+     *     type="string",
+     *     example="00000000-0000-0000-000000000000",
+     *     description="API group parent_id"
+     * )
+     */
+    public $parent_id;
     /**
      * @OA\Property(
      *     property="title",
@@ -74,6 +84,7 @@ class ApiGroupCreateForm extends Model
         return [
             [['alias', 'title'], 'required'],
             [['alias', 'title'], 'string'],
+            [['api_group_id'], UuidValidator::class],
             [['sort'], 'integer'],
             [['sort'], 'default', 'value' => 0],
             [['in_menu', 'is_secured'], 'boolean'],

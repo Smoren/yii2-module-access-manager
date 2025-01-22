@@ -22,6 +22,15 @@ class ApiGroupFilterForm extends Model
     public $alias;
     /**
      * @OA\Property(
+     *     property="alias",
+     *     type="string",
+     *     example="00000000-0000-0000-000000000000",
+     *     description="API group parent_id"
+     * )
+     */
+    public $parent_id;
+    /**
+     * @OA\Property(
      *     property="title",
      *     type="string",
      *     example="My API group name",
