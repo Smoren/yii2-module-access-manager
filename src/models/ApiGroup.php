@@ -17,6 +17,7 @@ use yii\db\ActiveQuery;
  * This is the model class for table "access_api_group".
  *
  * @property string $id
+ * @property string $parent_id
  * @property string $alias
  * @property string $title
  * @property bool $in_menu
@@ -27,6 +28,7 @@ use yii\db\ActiveQuery;
  * @property int $created_at
  * @property int|null $updated_at
  *
+ * @property ApiGroup $apiGroup
  * @property ApiApiGroup[] $apiApiGroups
  * @property Api[] $apis
  * @property Permission[] $connections
@@ -48,7 +50,7 @@ class ApiGroup extends ActiveRecord
     public function rules()
     {
         return [
-            ['id', UuidValidator::class],
+            ['id', 'parent_id', UuidValidator::class],
             [['alias', 'title'], 'required'],
             [['in_menu', 'is_system', 'is_secured'], 'boolean'],
             [['extra'], 'safe'],
@@ -68,6 +70,7 @@ class ApiGroup extends ActiveRecord
     {
         return [
             'id' => 'ID',
+            'parent_id' => 'Parent ID',
             'alias' => 'Alias',
             'title' => 'Title',
             'in_menu' => 'In Menu',
@@ -78,6 +81,16 @@ class ApiGroup extends ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    /**
+     * Gets query for [[ApiGroup]].
+     *
+     * @return ActiveQuery|ApiGroupQuery
+     */
+    public function getApiGroups()
+    {
+        return $this->hasOne(ApiGroup::class, ['api_group_id' => 'id']);
     }
 
     /**
