@@ -15,7 +15,7 @@ use thamtech\uuid\validators\UuidValidator;
  *     description="API group alias"
  * )
  * @OA\Property(
- *     property="alias",
+ *     property="parent_id",
  *     type="string",
  *     example="00000000-0000-0000-000000000000",
  *     description="API group parent_id"
@@ -48,7 +48,7 @@ class ApiGroupUpdateForm extends ApiGroupCreateForm
     {
         return [
             [['alias', 'title'], 'string'],
-            [['api_group_id'], UuidValidator::class],
+            [['parent_id'], UuidValidator::class],
             [['in_menu', 'is_secured'], 'boolean'],
             [['in_menu'], 'default', 'value' => false],
             [['is_secured'], 'default', 'value' => true],
