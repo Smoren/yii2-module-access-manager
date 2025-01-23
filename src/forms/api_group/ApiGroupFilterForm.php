@@ -3,6 +3,7 @@
 namespace Smoren\Yii2\AccessManager\forms\api_group;
 
 use Smoren\Yii2\ActiveRecordExplicit\models\Model;
+use thamtech\uuid\validators\UuidValidator;
 
 /**
  * Model for api_group filter
@@ -22,7 +23,7 @@ class ApiGroupFilterForm extends Model
     public $alias;
     /**
      * @OA\Property(
-     *     property="alias",
+     *     property="parent_id",
      *     type="string",
      *     example="00000000-0000-0000-000000000000",
      *     description="API group parent_id"
@@ -74,6 +75,7 @@ class ApiGroupFilterForm extends Model
         return [
             [['alias', 'title', 'worker_group_id'], 'string'],
             [['in_menu', 'is_system'], 'boolean'],
+            [['parent_id'], UuidValidator::class],
             [['alias', 'title'], 'string', 'max' => 255],
         ];
     }
