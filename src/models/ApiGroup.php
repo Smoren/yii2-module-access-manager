@@ -50,7 +50,7 @@ class ApiGroup extends ActiveRecord
     public function rules()
     {
         return [
-            ['id', 'parent_id', UuidValidator::class],
+            [['id', 'parent_id'], UuidValidator::class],
             [['alias', 'title'], 'required'],
             [['in_menu', 'is_system', 'is_secured'], 'boolean'],
             [['extra'], 'safe'],

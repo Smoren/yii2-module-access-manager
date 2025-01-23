@@ -17,13 +17,9 @@ use Yii;
 
 class ApiGroupController extends CommonRestController
 {
-    use RestControllerTrait {
-        getRules as public static getRulesTrait;
-    }
-
     public static function getRules(string $apiPath, string $controllerPath, string $itemIdValidationRegexp): array
     {
-        $rules = self::getRulesTrait($apiPath, $controllerPath, $itemIdValidationRegexp);
+        $rules = RestControllerTrait::getRules($apiPath, $controllerPath, $itemIdValidationRegexp);
 
         return array_merge(
             $rules,
@@ -32,7 +28,7 @@ class ApiGroupController extends CommonRestController
                  * API for getting tree collection
                  * @see ApiGroupController::actionTree()
                  */
-                "GET {$apiPath}" => "{$controllerPath}/collection",
+                "GET {$apiPath}/tree" => "{$controllerPath}/tree",
             ]
         );
     }
@@ -47,7 +43,7 @@ class ApiGroupController extends CommonRestController
         $this->checkAccess(__FUNCTION__);
         Yii::$app->response->statusCode = StatusCode::OK;
 
-        $list = $this->getCollectionQuery()->all();
+        $list = $this->getCollectionQuery()->asArray()->all();
 
         return TreeHelper::fromList($list);
     }
